@@ -5,40 +5,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Каталог — Декор Комплект</title>
   
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   
   <style>
+    /* Local Fonts */
+    @font-face {
+      font-family: 'Montserrat';
+      src: url('./public/fonts/Montserrat/Montserrat-VariableFont_wght.ttf') format('truetype');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Montserrat';
+      src: url('./public/fonts/Montserrat/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');
+      font-weight: 100 900;
+      font-style: italic;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Playfair Display';
+      src: url('./public/fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
+      font-weight: 400 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Playfair Display';
+      src: url('./public/fonts/Playfair_Display/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('truetype');
+      font-weight: 400 900;
+      font-style: italic;
+      font-display: swap;
+    }
+    
     @font-face {
       font-family: 'Denistina';
       src: url('./public/fonts/denistina_en.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
     }
     
     :root {
-      --color-bg: #F5F2EB;
-      --color-primary: #8B7355;
-      --color-secondary: #5A5A5A;
-      --color-accent: #A89078;
-      --color-text: #2C2C2C;
-      --color-text-muted: #7A7A7A;
-      --color-surface: #FFFFFF;
-      --color-dark: #6B5B4F;
-      --color-cinnamon: #8B7355;
-      --color-border: #E8E4DC;
-      --color-green: #5D8A66;
-      --color-red: #C4704A;
-      --font-main: 'Montserrat', sans-serif;
+      --color-cream: #E8E0D5;
+      --color-cream-light: #F5F2ED;
+      --color-bronze: #9A8067;
+      --color-bronze-dark: #7D6652;
+      --color-truffle: #4F5856;
+      --color-truffle-dark: #3A4442;
+      --color-white: #FFFFFF;
+      --color-black: #1A1A1A;
+      --color-text: #2D2D2D;
+      --color-text-muted: #6B6B6B;
+      --color-border: #E0DCD6;
+      
+      --font-main: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-accent: 'Denistina', cursive;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
       font-family: var(--font-main);
-      font-weight: 300;
-      background: var(--color-bg);
+      font-weight: 400;
+      background: var(--color-cream-light);
       color: var(--color-text);
       line-height: 1.6;
     }
@@ -51,24 +87,26 @@
       top: 0;
       left: 0;
       right: 0;
-      z-index: 100;
-      padding: 20px 48px;
+      z-index: 1000;
+      padding: 0 60px;
+      height: 80px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(245, 242, 235, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--color-border);
+      background: rgba(245, 242, 237, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
     }
     
     .logo {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
     
     .logo-img {
-      height: 50px;
+      height: 44px;
       width: auto;
     }
     
@@ -78,69 +116,115 @@
     }
     
     .logo-name {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--font-serif);
       font-size: 18px;
       font-weight: 500;
-      color: var(--color-text);
+      color: var(--color-truffle);
+      letter-spacing: 0.5px;
     }
     
     .logo-tagline {
       font-size: 10px;
       color: var(--color-text-muted);
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
       text-transform: uppercase;
     }
     
     .nav {
       display: flex;
-      gap: 40px;
+      gap: 48px;
     }
     
     .nav a {
-      font-size: 12px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
       color: var(--color-text-muted);
-      transition: color 0.3s;
+      position: relative;
+      padding: 8px 0;
+      transition: color 0.3s var(--transition-smooth);
+    }
+    
+    .nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--color-bronze);
+      transition: width 0.4s var(--transition-smooth);
     }
     
     .nav a:hover,
     .nav a.active {
-      color: var(--color-primary);
+      color: var(--color-truffle);
+    }
+    
+    .nav a.active::after,
+    .nav a:hover::after {
+      width: 100%;
+    }
+    
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    
+    .header-phone {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-truffle);
     }
     
     .header-cta {
       padding: 12px 28px;
-      background: var(--color-primary);
-      color: white;
-      font-size: 11px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      transition: background 0.3s;
+      background: var(--color-truffle);
+      color: var(--color-white);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      border-radius: 100px;
+      transition: all 0.4s var(--transition-smooth);
     }
     
     .header-cta:hover {
-      background: var(--color-dark);
+      background: var(--color-bronze);
+      transform: translateY(-2px);
     }
     
-    /* ========== CATALOG LAYOUT ========== */
+    /* ========== CATALOG PAGE ========== */
     .catalog-page {
-      padding-top: 100px;
+      padding-top: 80px;
       display: flex;
       min-height: 100vh;
     }
     
     /* ========== SIDEBAR ========== */
     .sidebar {
-      width: 280px;
+      width: 300px;
       flex-shrink: 0;
       padding: 40px 32px;
-      background: var(--color-surface);
+      background: var(--color-white);
       border-right: 1px solid var(--color-border);
       position: sticky;
-      top: 100px;
-      height: calc(100vh - 100px);
+      top: 80px;
+      height: calc(100vh - 80px);
       overflow-y: auto;
+    }
+    
+    .sidebar::-webkit-scrollbar {
+      width: 4px;
+    }
+    
+    .sidebar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    .sidebar::-webkit-scrollbar-thumb {
+      background: var(--color-border);
+      border-radius: 10px;
     }
     
     .filter-section {
@@ -149,13 +233,15 @@
       border-bottom: 1px solid var(--color-border);
     }
     
-    .filter-section:last-child {
+    .filter-section:last-of-type {
       border-bottom: none;
     }
     
     .filter-title {
-      font-size: 14px;
-      font-weight: 400;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--color-truffle);
       margin-bottom: 20px;
       display: flex;
       justify-content: space-between;
@@ -167,6 +253,11 @@
       width: 16px;
       height: 16px;
       color: var(--color-text-muted);
+      transition: transform 0.3s var(--transition-smooth);
+    }
+    
+    .filter-title:hover svg {
+      color: var(--color-truffle);
     }
     
     .filter-options {
@@ -182,7 +273,7 @@
       cursor: pointer;
       font-size: 14px;
       color: var(--color-text-muted);
-      transition: color 0.3s;
+      transition: color 0.3s var(--transition-smooth);
     }
     
     .filter-option:hover {
@@ -190,68 +281,76 @@
     }
     
     .filter-option.active {
-      color: var(--color-secondary);
+      color: var(--color-truffle);
     }
     
     .filter-radio {
-      width: 18px;
-      height: 18px;
-      border: 1px solid var(--color-border);
+      width: 20px;
+      height: 20px;
+      border: 1.5px solid var(--color-border);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: border-color 0.3s;
+      transition: all 0.3s var(--transition-smooth);
     }
     
     .filter-option.active .filter-radio {
-      border-color: var(--color-secondary);
+      border-color: var(--color-bronze);
     }
     
     .filter-radio-inner {
       width: 10px;
       height: 10px;
-      background: var(--color-secondary);
+      background: var(--color-bronze);
       border-radius: 50%;
       opacity: 0;
-      transition: opacity 0.3s;
+      transform: scale(0);
+      transition: all 0.3s var(--transition-smooth);
     }
     
     .filter-option.active .filter-radio-inner {
       opacity: 1;
+      transform: scale(1);
     }
     
     .filter-count {
       margin-left: auto;
-      font-size: 13px;
+      font-size: 12px;
       color: var(--color-text-muted);
+      background: var(--color-cream-light);
+      padding: 2px 8px;
+      border-radius: 10px;
     }
     
     .filter-checkbox {
-      width: 18px;
-      height: 18px;
-      border: 1px solid var(--color-border);
-      border-radius: 4px;
+      width: 20px;
+      height: 20px;
+      border: 1.5px solid var(--color-border);
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s;
+      transition: all 0.3s var(--transition-smooth);
     }
     
     .filter-option.checked .filter-checkbox {
-      background: var(--color-secondary);
-      border-color: var(--color-secondary);
+      background: var(--color-bronze);
+      border-color: var(--color-bronze);
     }
     
     .filter-checkbox svg {
       width: 12px;
       height: 12px;
-      color: white;
+      color: var(--color-white);
       opacity: 0;
+      transform: scale(0);
+      transition: all 0.3s var(--transition-smooth);
     }
     
     .filter-option.checked .filter-checkbox svg {
       opacity: 1;
+      transform: scale(1);
     }
     
     /* Price Range */
@@ -269,39 +368,42 @@
     .price-input label {
       position: absolute;
       top: 50%;
-      left: 12px;
+      left: 14px;
       transform: translateY(-50%);
-      font-size: 13px;
+      font-size: 12px;
       color: var(--color-text-muted);
     }
     
     .price-input input {
       width: 100%;
-      padding: 12px 12px 12px 32px;
-      border: 1px solid var(--color-border);
-      border-radius: 4px;
+      padding: 14px 14px 14px 38px;
+      border: 1.5px solid var(--color-border);
+      border-radius: 10px;
       font-family: var(--font-main);
       font-size: 14px;
-      background: var(--color-bg);
+      background: var(--color-cream-light);
+      color: var(--color-text);
+      transition: all 0.3s var(--transition-smooth);
     }
     
     .price-input input:focus {
       outline: none;
-      border-color: var(--color-secondary);
+      border-color: var(--color-bronze);
+      background: var(--color-white);
     }
     
     .price-slider {
       height: 4px;
       background: var(--color-border);
-      border-radius: 2px;
+      border-radius: 10px;
       position: relative;
     }
     
     .price-slider-fill {
       position: absolute;
       height: 100%;
-      background: var(--color-secondary);
-      border-radius: 2px;
+      background: var(--color-bronze);
+      border-radius: 10px;
       left: 0;
       width: 100%;
     }
@@ -309,32 +411,63 @@
     .filter-btn {
       width: 100%;
       padding: 16px;
-      background: var(--color-secondary);
+      background: var(--color-truffle);
       border: none;
-      border-radius: 4px;
-      color: white;
+      border-radius: 12px;
+      color: var(--color-white);
       font-family: var(--font-main);
       font-size: 13px;
-      letter-spacing: 1px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: all 0.4s var(--transition-smooth);
     }
     
     .filter-btn:hover {
-      background: var(--color-cinnamon);
+      background: var(--color-bronze);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(154, 128, 103, 0.3);
+    }
+    
+    .filter-reset {
+      width: 100%;
+      padding: 14px;
+      background: transparent;
+      border: 1.5px solid var(--color-border);
+      border-radius: 12px;
+      color: var(--color-text-muted);
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: all 0.3s var(--transition-smooth);
+    }
+    
+    .filter-reset:hover {
+      border-color: var(--color-truffle);
+      color: var(--color-truffle);
     }
     
     /* ========== CATALOG CONTENT ========== */
     .catalog-content {
       flex: 1;
-      padding: 40px;
+      padding: 40px 48px;
+      background: var(--color-cream-light);
     }
     
     .catalog-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 32px;
+      margin-bottom: 40px;
+    }
+    
+    .catalog-title-area h1 {
+      font-size: 32px;
+      font-weight: 400;
+      color: var(--color-truffle);
+      margin-bottom: 8px;
     }
     
     .catalog-count {
@@ -345,7 +478,7 @@
     .catalog-controls {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 20px;
     }
     
     .sort-select {
@@ -360,91 +493,59 @@
     }
     
     .sort-select select {
-      padding: 10px 32px 10px 14px;
-      border: 1px solid var(--color-border);
-      border-radius: 4px;
-      background: var(--color-surface);
+      padding: 12px 40px 12px 16px;
+      border: 1.5px solid var(--color-border);
+      border-radius: 10px;
+      background: var(--color-white);
       font-family: var(--font-main);
       font-size: 13px;
       color: var(--color-text);
       cursor: pointer;
       appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237A7A7A' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B6B6B' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: right 12px center;
+      background-position: right 14px center;
+      transition: all 0.3s var(--transition-smooth);
     }
     
-    .view-toggle {
-      display: flex;
-      gap: 4px;
+    .sort-select select:focus {
+      outline: none;
+      border-color: var(--color-bronze);
     }
     
-    .view-btn {
-      width: 40px;
-      height: 40px;
-      border: 1px solid var(--color-border);
-      background: var(--color-surface);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    
-    .view-btn:first-child {
-      border-radius: 4px 0 0 4px;
-    }
-    
-    .view-btn:last-child {
-      border-radius: 0 4px 4px 0;
-    }
-    
-    .view-btn.active {
-      background: var(--color-secondary);
-      border-color: var(--color-secondary);
-    }
-    
-    .view-btn svg {
-      width: 18px;
-      height: 18px;
-      color: var(--color-text-muted);
-    }
-    
-    .view-btn.active svg {
-      color: white;
-    }
     
     /* ========== PRODUCTS GRID ========== */
     .products-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 28px;
     }
     
     .product-card {
-      background: var(--color-surface);
-      border-radius: 8px;
+      background: var(--color-white);
+      border-radius: 16px;
       overflow: hidden;
-      transition: box-shadow 0.3s, transform 0.3s;
+      transition: all 0.5s var(--transition-smooth);
+      position: relative;
     }
     
     .product-card:hover {
-      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
-      transform: translateY(-4px);
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.08);
     }
     
     .product-card-image {
       position: relative;
       aspect-ratio: 1;
       overflow: hidden;
-      background: var(--color-bg);
+      background: var(--color-cream);
     }
     
     .product-card-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.6s;
+      transition: transform 0.6s var(--transition-smooth);
     }
     
     .product-card:hover .product-card-image img {
@@ -456,68 +557,97 @@
       top: 16px;
       left: 16px;
       padding: 6px 14px;
-      border-radius: 4px;
+      border-radius: 100px;
       font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.5px;
+      font-weight: 500;
     }
     
     .product-badge.new {
-      background: var(--color-green);
-      color: white;
+      background: var(--color-truffle);
+      color: var(--color-white);
     }
     
     .product-badge.sale {
-      background: var(--color-red);
-      color: white;
+      background: var(--color-bronze);
+      color: var(--color-white);
     }
     
     .product-badge.promo {
-      background: var(--color-secondary);
-      color: white;
+      background: var(--color-cream);
+      color: var(--color-truffle);
     }
     
     .product-card-sku {
       position: absolute;
       bottom: 12px;
       left: 12px;
-      padding: 4px 10px;
-      background: rgba(255,255,255,0.9);
-      border-radius: 4px;
+      padding: 6px 12px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 8px;
       font-size: 11px;
       color: var(--color-text-muted);
     }
     
+    
+    .product-quick-view {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      padding: 12px 24px;
+      background: var(--color-white);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-truffle);
+      opacity: 0;
+      transition: all 0.4s var(--transition-smooth);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      white-space: nowrap;
+    }
+    
+    .product-card:hover .product-quick-view {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    
     .product-card-content {
-      padding: 20px;
+      padding: 24px;
     }
     
     .product-card-category {
       font-size: 11px;
+      font-weight: 500;
       letter-spacing: 1px;
       text-transform: uppercase;
-      color: var(--color-secondary);
+      color: var(--color-bronze);
       margin-bottom: 8px;
     }
     
     .product-card-name {
       font-size: 15px;
       font-weight: 400;
-      margin-bottom: 12px;
-      color: var(--color-text);
+      margin-bottom: 16px;
+      color: var(--color-truffle);
       line-height: 1.4;
+    }
+    
+    .product-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     
     .product-card-price {
       display: flex;
       align-items: baseline;
       gap: 10px;
-      margin-bottom: 16px;
     }
     
     .price-current {
-      font-size: 17px;
-      font-weight: 400;
+      font-size: 18px;
+      font-weight: 500;
       color: var(--color-text);
     }
     
@@ -528,23 +658,30 @@
     }
     
     .product-card-btn {
-      width: 100%;
-      padding: 14px;
-      background: transparent;
-      border: 1px solid var(--color-border);
-      border-radius: 4px;
-      font-family: var(--font-main);
-      font-size: 12px;
-      letter-spacing: 0.5px;
-      color: var(--color-text);
+      width: 44px;
+      height: 44px;
+      background: var(--color-cream-light);
+      border: none;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: all 0.3s var(--transition-smooth);
+    }
+    
+    .product-card-btn svg {
+      width: 20px;
+      height: 20px;
+      color: var(--color-truffle);
     }
     
     .product-card-btn:hover {
-      background: var(--color-primary);
-      border-color: var(--color-primary);
-      color: white;
+      background: var(--color-truffle);
+    }
+    
+    .product-card-btn:hover svg {
+      color: var(--color-white);
     }
     
     /* ========== PAGINATION ========== */
@@ -552,116 +689,136 @@
       display: flex;
       justify-content: center;
       gap: 8px;
-      margin-top: 48px;
+      margin-top: 60px;
     }
     
     .pagination-btn {
-      width: 44px;
-      height: 44px;
-      border: 1px solid var(--color-border);
-      background: var(--color-surface);
-      border-radius: 4px;
+      min-width: 48px;
+      height: 48px;
+      padding: 0 16px;
+      border: 1.5px solid var(--color-border);
+      background: var(--color-white);
+      border-radius: 12px;
       font-family: var(--font-main);
       font-size: 14px;
+      font-weight: 500;
       color: var(--color-text-muted);
       cursor: pointer;
-      transition: all 0.3s;
+      transition: all 0.3s var(--transition-smooth);
     }
     
     .pagination-btn:hover {
-      border-color: var(--color-secondary);
-      color: var(--color-secondary);
+      border-color: var(--color-bronze);
+      color: var(--color-bronze);
     }
     
     .pagination-btn.active {
-      background: var(--color-secondary);
-      border-color: var(--color-secondary);
-      color: white;
+      background: var(--color-truffle);
+      border-color: var(--color-truffle);
+      color: var(--color-white);
     }
     
     /* ========== FOOTER ========== */
     .footer {
-      padding: 60px 48px;
-      background: var(--color-primary);
-      color: var(--color-bg);
+      padding: 80px 60px 40px;
+      background: var(--color-truffle-dark);
+      color: var(--color-cream);
     }
     
-    .footer-content {
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      max-width: 1400px;
+      margin: 0 auto 60px;
+    }
+    
+    .footer-brand {
+      max-width: 280px;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .footer-logo-img {
+      height: 44px;
+      width: auto;
+    }
+    
+    .footer-logo-name {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--color-cream);
+      letter-spacing: 0.5px;
+    }
+    
+    .footer-desc {
+      font-size: 14px;
+      color: rgba(232, 224, 213, 0.6);
+      line-height: 1.7;
+    }
+    
+    .footer-col h4 {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(232, 224, 213, 0.4);
+      margin-bottom: 24px;
+    }
+    
+    .footer-col a {
+      display: block;
+      font-size: 14px;
+      color: rgba(232, 224, 213, 0.8);
+      margin-bottom: 14px;
+      transition: all 0.3s var(--transition-smooth);
+    }
+    
+    .footer-col a:hover {
+      color: var(--color-cream);
+      transform: translateX(4px);
+    }
+    
+    .footer-bottom {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.08);
       max-width: 1400px;
       margin: 0 auto;
     }
     
-    .footer-logo-wrap {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    
-    .footer-logo-img {
-      height: 50px;
-      width: auto;
-    }
-    
-    .footer-logo-text {
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .footer-logo-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      font-weight: 500;
-      color: var(--color-bg);
-    }
-    
-    .footer-logo-tagline {
-      font-size: 11px;
-      color: rgba(245, 242, 235, 0.7);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-    
-    .footer-links {
-      display: flex;
-      gap: 40px;
-    }
-    
-    .footer-links a {
-      font-size: 12px;
-      letter-spacing: 1px;
-      color: var(--color-bg);
-      transition: opacity 0.3s;
-    }
-    
-    .footer-links a:hover {
-      opacity: 0.7;
-    }
-    
     .footer-copy {
-      font-size: 11px;
-      color: rgba(245, 242, 235, 0.5);
+      font-size: 13px;
+      color: rgba(232, 224, 213, 0.4);
     }
-
+    
     /* ========== RESPONSIVE ========== */
     @media (max-width: 1200px) {
       .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
     }
-
+    
     @media (max-width: 1024px) {
       .sidebar { display: none; }
-      .catalog-content { padding: 24px; }
+      .catalog-content { padding: 32px 24px; }
     }
-
+    
     @media (max-width: 768px) {
-      .header { padding: 16px 24px; }
-      .nav, .header-cta { display: none; }
+      .header { padding: 0 24px; height: 70px; }
+      .nav, .header-phone { display: none; }
       .products-grid { grid-template-columns: 1fr; }
-      .catalog-header { flex-direction: column; gap: 16px; align-items: flex-start; }
-      .footer { padding: 40px 24px; }
-      .footer-content { flex-direction: column; gap: 24px; text-align: center; }
+      .catalog-header { flex-direction: column; gap: 20px; align-items: flex-start; }
+      .footer { padding: 60px 24px 30px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
     }
   </style>
 </head>
@@ -679,10 +836,13 @@
     <nav class="nav">
       <a href="index.html">Главная</a>
       <a href="catalog.html" class="active">Каталог</a>
-      <a href="#">О нас</a>
+      <a href="#">О компании</a>
       <a href="#">Контакты</a>
     </nav>
-    <a href="#" class="header-cta">Консультация</a>
+    <div class="header-right">
+      <a href="tel:+73517277339" class="header-phone">+7 351 727-73-39</a>
+      <a href="#" class="header-cta">Консультация</a>
+    </div>
   </header>
 
   <!-- CATALOG PAGE -->
@@ -710,7 +870,7 @@
           </div>
           <div class="filter-option">
             <div class="filter-radio"><div class="filter-radio-inner"></div></div>
-            <span>Декоративная штукатурка</span>
+            <span>Штукатурка</span>
             <span class="filter-count">18</span>
           </div>
           <div class="filter-option">
@@ -794,38 +954,25 @@
       </div>
       
       <button class="filter-btn">Применить фильтры</button>
+      <button class="filter-reset">Сбросить все</button>
     </aside>
 
     <!-- CATALOG CONTENT -->
     <main class="catalog-content">
       <div class="catalog-header">
-        <span class="catalog-count">Найдено 86 товаров</span>
+        <div class="catalog-title-area">
+          <h1>Каталог товаров</h1>
+          <span class="catalog-count">Найдено 86 товаров</span>
+        </div>
         <div class="catalog-controls">
           <div class="sort-select">
-            <label>Сортировать:</label>
+            <label>Сортировка:</label>
             <select>
               <option>По популярности</option>
-              <option>По цене ↑</option>
-              <option>По цене ↓</option>
+              <option>Сначала дешевле</option>
+              <option>Сначала дороже</option>
               <option>По новизне</option>
             </select>
-          </div>
-          <div class="view-toggle">
-            <button class="view-btn active">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="3" width="7" height="7"></rect>
-                <rect x="14" y="3" width="7" height="7"></rect>
-                <rect x="3" y="14" width="7" height="7"></rect>
-                <rect x="14" y="14" width="7" height="7"></rect>
-              </svg>
-            </button>
-            <button class="view-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-              </svg>
-            </button>
           </div>
         </div>
       </div>
@@ -836,14 +983,23 @@
             <span class="product-badge new">Новинка</span>
             <img src="./public/images/-1h3uUw4nt-2G2k6A_qz2lDA5hJA1h1Zxig1S02t95xRPZaGzuN_cwWh0eqqi68Yte_lAZF705PLRHiTMm4NZhos.webp" alt="Product">
             <span class="product-card-sku">6.53.803</span>
+            <span class="product-quick-view">Быстрый просмотр</span>
           </div>
           <div class="product-card-content">
             <p class="product-card-category">Краски</p>
             <h3 class="product-card-name">Краска интерьерная Velvet Matte</h3>
-            <div class="product-card-price">
-              <span class="price-current">4 500 ₽</span>
+            <div class="product-card-footer">
+              <div class="product-card-price">
+                <span class="price-current">4 500 ₽</span>
+              </div>
+              <button class="product-card-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+              </button>
             </div>
-            <button class="product-card-btn">В корзину</button>
           </div>
         </a>
         
@@ -851,15 +1007,24 @@
           <div class="product-card-image">
             <span class="product-badge sale">-15%</span>
             <img src="./public/images/eYPy5_3n3tJ5d5ebWazQneW8cfk-OaopdJg7A0ZD2T0feZax92_MPMptJTeTYEV7MpNDwXDf9N2z8EIk_8Bdlm8n.webp" alt="Product">
+            <span class="product-quick-view">Быстрый просмотр</span>
           </div>
           <div class="product-card-content">
             <p class="product-card-category">Краски</p>
-            <h3 class="product-card-name">Краска фасадная WeatherShield</h3>
-            <div class="product-card-price">
-              <span class="price-current">5 200 ₽</span>
-              <span class="price-old">6 000 ₽</span>
+            <h3 class="product-card-name">Краска фасадная WeatherShield Pro</h3>
+            <div class="product-card-footer">
+              <div class="product-card-price">
+                <span class="price-current">5 200 ₽</span>
+                <span class="price-old">6 000 ₽</span>
+              </div>
+              <button class="product-card-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+              </button>
             </div>
-            <button class="product-card-btn">В корзину</button>
           </div>
         </a>
         
@@ -867,28 +1032,46 @@
           <div class="product-card-image">
             <span class="product-badge new">Новинка</span>
             <img src="./public/images/EN4LWs-4M-pPutx2FVyLhTx_wTnO30jqmPIzZJidAovx90GUNtu7iEiJ0v06F3FZi1A02jwtfKz9igAokTKXKTWf.webp" alt="Product">
+            <span class="product-quick-view">Быстрый просмотр</span>
           </div>
           <div class="product-card-content">
             <p class="product-card-category">Штукатурка</p>
             <h3 class="product-card-name">Штукатурка Venice Premium</h3>
-            <div class="product-card-price">
-              <span class="price-current">8 500 ₽</span>
+            <div class="product-card-footer">
+              <div class="product-card-price">
+                <span class="price-current">8 500 ₽</span>
+              </div>
+              <button class="product-card-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+              </button>
             </div>
-            <button class="product-card-btn">В корзину</button>
           </div>
         </a>
         
         <a href="product.html" class="product-card">
           <div class="product-card-image">
             <img src="./public/images/fJ08JFB-rg8PI2ChKA74qPMAbdBpgU8rlIuZiDpHK5lrvssMLnfCdC6T5dk8bqaw4R-8LDqv0Y3h0acYuX1Z3A1S.webp" alt="Product">
+            <span class="product-quick-view">Быстрый просмотр</span>
           </div>
           <div class="product-card-content">
             <p class="product-card-category">Штукатурка</p>
-            <h3 class="product-card-name">Штукатурка Travertino</h3>
-            <div class="product-card-price">
-              <span class="price-current">7 200 ₽</span>
+            <h3 class="product-card-name">Штукатурка Travertino Natural</h3>
+            <div class="product-card-footer">
+              <div class="product-card-price">
+                <span class="price-current">7 200 ₽</span>
+              </div>
+              <button class="product-card-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+              </button>
             </div>
-            <button class="product-card-btn">В корзину</button>
           </div>
         </a>
         
@@ -896,28 +1079,46 @@
           <div class="product-card-image">
             <span class="product-badge new">Новинка</span>
             <img src="./public/images/GncO_b-uaNqLeEGK81TnLTenZbi4dpYU1sThR_24kTx5SL89PSQEZ-HB1_waQUT636qIJKxnLQNtQyRh8w9jmMdh.webp" alt="Product">
+            <span class="product-quick-view">Быстрый просмотр</span>
           </div>
           <div class="product-card-content">
             <p class="product-card-category">Обои</p>
-            <h3 class="product-card-name">Обои Geometric Art</h3>
-            <div class="product-card-price">
-              <span class="price-current">12 000 ₽</span>
+            <h3 class="product-card-name">Обои Geometric Art Collection</h3>
+            <div class="product-card-footer">
+              <div class="product-card-price">
+                <span class="price-current">12 000 ₽</span>
+              </div>
+              <button class="product-card-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+              </button>
             </div>
-            <button class="product-card-btn">В корзину</button>
           </div>
         </a>
         
         <a href="product.html" class="product-card">
           <div class="product-card-image">
             <img src="./public/images/NFHSDUk7hCs2n7OwJTP36Z24XZj6F2jkd1N8rkY1nySx47Etk_SEoDPcaFVZy12_Zm-QN5pIx8WXzQUAUOCo04Zr.webp" alt="Product">
+            <span class="product-quick-view">Быстрый просмотр</span>
           </div>
           <div class="product-card-content">
             <p class="product-card-category">Фрески</p>
-            <h3 class="product-card-name">Фреска Renaissance</h3>
-            <div class="product-card-price">
-              <span class="price-current">45 000 ₽</span>
+            <h3 class="product-card-name">Фреска Renaissance Classic</h3>
+            <div class="product-card-footer">
+              <div class="product-card-price">
+                <span class="price-current">45 000 ₽</span>
+              </div>
+              <button class="product-card-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+              </button>
             </div>
-            <button class="product-card-btn">В корзину</button>
           </div>
         </a>
         
@@ -925,44 +1126,71 @@
           <div class="product-card-image">
             <span class="product-badge sale">-10%</span>
             <img src="./public/images/hMyiqRne_yKFUC8ycU9ZL31K65kc1V3k8T8NJBOgq2nMixxxswu91k1To9jkiPtJ5260gaW3KS4JxYtzGxQQdEtT.webp" alt="Product">
+            <span class="product-quick-view">Быстрый просмотр</span>
           </div>
           <div class="product-card-content">
             <p class="product-card-category">Лепной декор</p>
-            <h3 class="product-card-name">Молдинг Classic Art</h3>
-            <div class="product-card-price">
-              <span class="price-current">2 700 ₽</span>
-              <span class="price-old">3 000 ₽</span>
+            <h3 class="product-card-name">Молдинг Classic Art Premium</h3>
+            <div class="product-card-footer">
+              <div class="product-card-price">
+                <span class="price-current">2 700 ₽</span>
+                <span class="price-old">3 000 ₽</span>
+              </div>
+              <button class="product-card-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+              </button>
             </div>
-            <button class="product-card-btn">В корзину</button>
           </div>
         </a>
         
         <a href="product.html" class="product-card">
           <div class="product-card-image">
             <img src="./public/images/lVkR9959f8z_FEUNoddQBjutcZTQvcwVmxD_bqGDzM51Z6D5tVgQq4JPSHmzLMeeaCZZKjEt276fWVIhQ5qzp-AA.webp" alt="Product">
+            <span class="product-quick-view">Быстрый просмотр</span>
           </div>
           <div class="product-card-content">
             <p class="product-card-category">Обои</p>
-            <h3 class="product-card-name">Обои Floral Paradise</h3>
-            <div class="product-card-price">
-              <span class="price-current">15 500 ₽</span>
+            <h3 class="product-card-name">Обои Floral Paradise Premium</h3>
+            <div class="product-card-footer">
+              <div class="product-card-price">
+                <span class="price-current">15 500 ₽</span>
+              </div>
+              <button class="product-card-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+              </button>
             </div>
-            <button class="product-card-btn">В корзину</button>
           </div>
         </a>
         
         <a href="product.html" class="product-card">
           <div class="product-card-image">
-            <span class="product-badge promo">новинка 2025 года</span>
+            <span class="product-badge promo">Коллекция 2026</span>
             <img src="./public/images/aRBPhz4RjUDMc29iMx9Oxtqa8lAleuqZ4mzKgVZjigG6lDPtMJTjTvbwNDuhnaSRc1waJgnh78zihfK5xXCYu_8j.webp" alt="Product">
+            <span class="product-quick-view">Быстрый просмотр</span>
           </div>
           <div class="product-card-content">
             <p class="product-card-category">Штукатурка</p>
-            <h3 class="product-card-name">Гибкий камень Premium</h3>
-            <div class="product-card-price">
-              <span class="price-current">9 800 ₽</span>
+            <h3 class="product-card-name">Гибкий камень Premium Stone</h3>
+            <div class="product-card-footer">
+              <div class="product-card-price">
+                <span class="price-current">9 800 ₽</span>
+              </div>
+              <button class="product-card-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+              </button>
             </div>
-            <button class="product-card-btn">В корзину</button>
           </div>
         </a>
       </div>
@@ -972,32 +1200,50 @@
         <button class="pagination-btn">2</button>
         <button class="pagination-btn">3</button>
         <button class="pagination-btn">4</button>
-        <button class="pagination-btn">→</button>
+        <button class="pagination-btn">Далее</button>
       </div>
     </main>
   </div>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-logo-wrap">
-        <img src="./public/images/logo.webp" alt="Декор Комплект" class="footer-logo-img">
-        <div class="footer-logo-text">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <img src="./public/images/logo.webp" alt="Декор Комплект" class="footer-logo-img">
           <span class="footer-logo-name">Декор Комплект</span>
-          <span class="footer-logo-tagline">Салон декоративных покрытий</span>
-        </div>
+        </a>
+        <p class="footer-desc">Премиальные декоративные покрытия для создания уникальных интерьеров. Работаем с 2009 года.</p>
       </div>
-      <div class="footer-links">
-        <a href="catalog.html">Каталог</a>
+      <div class="footer-col">
+        <h4>Каталог</h4>
+        <a href="catalog.html">Краски</a>
+        <a href="catalog.html">Штукатурка</a>
+        <a href="catalog.html">Обои</a>
+        <a href="catalog.html">Фрески</a>
+      </div>
+      <div class="footer-col">
+        <h4>Компания</h4>
         <a href="#">О нас</a>
         <a href="#">Контакты</a>
-        <a href="tel:+73517277339">8 (351) 727-73-39</a>
+        <a href="#">Доставка</a>
+        <a href="#">Оплата</a>
       </div>
-      <div class="footer-copy">© 2026</div>
+      <div class="footer-col">
+        <h4>Контакты</h4>
+        <a href="tel:+73517277339">8 (351) 727-73-39</a>
+        <a href="#">ул. Коммуны, 127</a>
+        <a href="#">ул. Труда, 174</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2009–2026 Декор Комплект. Все права защищены.</span>
     </div>
   </footer>
 
   <script>
+    gsap.registerPlugin(ScrollTrigger);
+
     // Filter interactions
     document.querySelectorAll('.filter-option').forEach(option => {
       option.addEventListener('click', () => {
@@ -1016,14 +1262,40 @@
     // Product cards animation
     gsap.utils.toArray('.product-card').forEach((card, i) => {
       gsap.fromTo(card, 
-        { opacity: 0, y: 30 },
+        { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.5,
-          delay: (i % 3) * 0.1
+          duration: 0.6,
+          delay: (i % 3) * 0.1,
+          ease: 'power3.out'
         }
       );
+    });
+
+    // Magnetic effect on buttons
+    document.querySelectorAll('.filter-btn, .product-card-btn').forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        gsap.to(btn, {
+          x: x * 0.2,
+          y: y * 0.2,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      });
+
+      btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, {
+          x: 0,
+          y: 0,
+          duration: 0.5,
+          ease: 'elastic.out(1, 0.5)'
+        });
+      });
     });
   </script>
 

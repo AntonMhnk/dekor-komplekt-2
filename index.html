@@ -1,425 +1,501 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Декор Комплект — Салон декоративных покрытий</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  
+
   <style>
-    /* ================================================
-       КОНЦЕПТ 2: SCROLL SECTIONS
-       Цвета: Cinnamon (коричневый) + Изумрудный
-       ================================================ */
+    /* Local Fonts */
+    @font-face {
+      font-family: 'Montserrat';
+      src: url('./public/fonts/Montserrat/Montserrat-VariableFont_wght.ttf') format('truetype');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Montserrat';
+      src: url('./public/fonts/Montserrat/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');
+      font-weight: 100 900;
+      font-style: italic;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Playfair Display';
+      src: url('./public/fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
+      font-weight: 400 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Playfair Display';
+      src: url('./public/fonts/Playfair_Display/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('truetype');
+      font-weight: 400 900;
+      font-style: italic;
+      font-display: swap;
+    }
     
     @font-face {
       font-family: 'Denistina';
       src: url('./public/fonts/denistina_en.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
     }
     
     :root {
-      --color-bg: #F5F2EB;
-      --color-primary: #8B7355;
-      --color-secondary: #5A5A5A;
-      --color-accent: #A89078;
-      --color-text: #2C2C2C;
-      --color-text-muted: #7A7A7A;
-      --color-surface: #FFFFFF;
-      --color-dark: #6B5B4F;
-      --color-cinnamon: #8B7355;
-      --font-main: 'Montserrat', sans-serif;
+      /* Color Palette from provided swatches */
+      --color-cream: #E8E0D5;
+      --color-cream-light: #F5F2ED;
+      --color-bronze: #9A8067;
+      --color-bronze-dark: #7D6652;
+      --color-truffle: #4F5856;
+      --color-truffle-dark: #3A4442;
+      --color-white: #FFFFFF;
+      --color-black: #1A1A1A;
+      --color-text: #2D2D2D;
+      --color-text-muted: #6B6B6B;
+      --color-border: #E0DCD6;
+
+      --font-main: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-accent: 'Denistina', cursive;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     html {
       scroll-behavior: smooth;
     }
-    
+
     body {
       font-family: var(--font-main);
-      font-weight: 300;
-      background: var(--color-bg);
+      font-weight: 400;
+      background: var(--color-cream-light);
       color: var(--color-text);
       line-height: 1.6;
       overflow-x: hidden;
     }
-    
+
     a {
       text-decoration: none;
       color: inherit;
     }
-    
+
+
     /* ========== HEADER ========== */
     .header {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      z-index: 100;
-      padding: 20px 48px;
+      z-index: 1000;
+      padding: 0 60px;
+      height: 80px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(247, 245, 242, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0,0,0,0.05);
+      background: rgba(245, 242, 237, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      transition: all 0.4s var(--transition-smooth);
     }
-    
+
+    .header.scrolled {
+      height: 70px;
+      background: rgba(245, 242, 237, 0.95);
+    }
+
     .logo {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
-    
+
     .logo-img {
-      height: 50px;
+      height: 44px;
       width: auto;
+      transition: transform 0.3s var(--transition-smooth);
     }
-    
+
+    .logo:hover .logo-img {
+      transform: scale(1.05);
+    }
+
     .logo-text {
       display: flex;
       flex-direction: column;
     }
-    
+
     .logo-name {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--font-serif);
       font-size: 18px;
       font-weight: 500;
-      color: var(--color-text);
+      color: var(--color-truffle);
+      letter-spacing: 0.5px;
     }
-    
+
     .logo-tagline {
       font-size: 10px;
       color: var(--color-text-muted);
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
       text-transform: uppercase;
     }
-    
+
     .nav {
       display: flex;
-      gap: 40px;
+      gap: 48px;
     }
-    
+
     .nav a {
-      font-size: 12px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
       color: var(--color-text-muted);
+      position: relative;
+      padding: 8px 0;
+      transition: color 0.3s var(--transition-smooth);
+    }
+
+    .nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--color-bronze);
+      transition: width 0.4s var(--transition-smooth);
+    }
+
+    .nav a:hover {
+      color: var(--color-truffle);
+    }
+
+    .nav a:hover::after {
+      width: 100%;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .header-phone {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-truffle);
       transition: color 0.3s;
     }
-    
-    .nav a:hover {
-      color: var(--color-primary);
+
+    .header-phone:hover {
+      color: var(--color-bronze);
     }
-    
+
     .header-cta {
       padding: 12px 28px;
-      background: var(--color-primary);
-      color: white;
-      font-size: 11px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      transition: background 0.3s;
+      background: var(--color-truffle);
+      color: var(--color-white);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      border-radius: 100px;
+      transition: all 0.4s var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
     }
-    
+
+    .header-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
     .header-cta:hover {
-      background: var(--color-dark);
+      background: var(--color-bronze);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(154, 128, 103, 0.3);
     }
-    
+
+    .header-cta:hover::before {
+      left: 100%;
+    }
+
     /* ========== HERO ========== */
     .hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
-      padding: 120px 48px 80px;
+      padding: 120px 60px 80px;
       position: relative;
       overflow: hidden;
+      background: var(--color-cream-light);
     }
-    
-    .hero-bg {
+
+    .hero-bg-pattern {
       position: absolute;
       top: 0;
+      left: 0;
       right: 0;
-      width: 55%;
-      height: 100%;
-      background-image: url('./public/images/eYPy5_3n3tJ5d5ebWazQneW8cfk-OaopdJg7A0ZD2T0feZax92_MPMptJTeTYEV7MpNDwXDf9N2z8EIk_8Bdlm8n.webp');
-      background-size: cover;
-      background-position: center;
-      clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
-    }
-    /* Убираем артефакт (тонкую линию) по краю clip-path в hero */
-    .hero::after {
-      content: '';
-      position: absolute;
-      left: 13%;
-      top: 0;
       bottom: 0;
-      width: 10px;
-      background: var(--color-bg);
-      transform: skewX(-8.5deg);
+      background-image:
+        radial-gradient(circle at 20% 80%, rgba(154, 128, 103, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(79, 88, 86, 0.03) 0%, transparent 50%);
       pointer-events: none;
-      z-index: 1;
     }
-    
+
     .hero-grid {
-      display: block;
-      max-width: 600px;
-      margin: 0;
-      margin-left: 5%;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
       width: 100%;
+    }
+
+    .hero-content {
       position: relative;
       z-index: 2;
     }
-    
-    .hero-content {
-      padding-right: 40px;
-    }
-    
+
     .hero-label {
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
       opacity: 0;
       transform: translateY(20px);
     }
-    
+
     .hero-label-line {
       width: 40px;
-      height: 2px;
-      background: var(--color-secondary);
+      height: 1.5px;
+      background: var(--color-bronze);
     }
-    
+
     .hero-label-text {
       font-size: 11px;
-      letter-spacing: 3px;
+      font-weight: 500;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--color-secondary);
+      color: var(--color-bronze);
     }
-    
+
     .hero-title {
-      font-family: var(--font-accent);
-      font-size: clamp(48px, 6vw, 80px);
-      font-weight: normal;
-      line-height: 1.1;
-      margin-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 32px;
       opacity: 0;
       transform: translateY(30px);
     }
-    
-    .hero-title .accent {
-      color: var(--color-primary);
-      font-style: italic;
+
+    .hero-title-accent {
+      font-family: var(--font-accent);
+      font-size: clamp(52px, 7vw, 90px);
+      color: var(--color-bronze);
+      line-height: 1.1;
+      letter-spacing: 1px;
     }
-    
+
+    .hero-title-sub {
+      font-family: var(--font-main);
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 400;
+      color: var(--color-truffle);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
     .hero-text {
-      font-size: 16px;
+      font-size: 17px;
       color: var(--color-text-muted);
-      max-width: 420px;
-      margin-bottom: 48px;
-      line-height: 1.8;
+      max-width: 440px;
+      margin-bottom: 40px;
+      line-height: 1.7;
       opacity: 0;
       transform: translateY(20px);
     }
-    
+
     .hero-buttons {
       display: flex;
-      gap: 20px;
+      gap: 16px;
       opacity: 0;
       transform: translateY(20px);
     }
-    
+
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      padding: 18px 36px;
+      gap: 10px;
+      padding: 16px 32px;
       font-family: var(--font-main);
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
       cursor: pointer;
-      transition: all 0.4s ease;
       border: none;
+      border-radius: 100px;
+      transition: all 0.4s var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
     }
-    
+
     .btn-primary {
-      background: var(--color-primary);
-      color: white;
+      background: var(--color-truffle);
+      color: var(--color-white);
     }
-    
+
     .btn-primary:hover {
-      background: var(--color-dark);
+      background: var(--color-truffle-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(79, 88, 86, 0.25);
     }
-    
+
+    .btn-primary svg {
+      transition: transform 0.3s var(--transition-smooth);
+    }
+
+    .btn-primary:hover svg {
+      transform: translateX(4px);
+    }
+
     .btn-secondary {
       background: transparent;
-      border: 1px solid var(--color-secondary);
-      color: var(--color-text);
+      border: 1.5px solid var(--color-border);
+      color: var(--color-truffle);
     }
-    
+
     .btn-secondary:hover {
-      background: var(--color-secondary);
-      color: white;
+      border-color: var(--color-bronze);
+      background: rgba(154, 128, 103, 0.05);
+      transform: translateY(-3px);
     }
-    
+
     .hero-image {
-      display: none;
-    }
-    
-    .hero-image-main {
-      display: none;
-    }
-    
-    .hero-image-badge {
-      display: none;
-    }
-    
-    .hero-badge-number {
-      display: none;
-    }
-    
-    .hero-badge-text {
-      display: none;
-    }
-    
-    /* ========== FEATURES STRIP ========== */
-    .features-strip {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      background: var(--color-cinnamon);
-      color: white;
-    }
-    
-    .feature-item {
-      padding: 48px 32px;
-      text-align: center;
-      border-right: 1px solid rgba(255,255,255,0.1);
-    }
-    
-    .feature-item:last-child {
-      border-right: none;
-    }
-    
-    .feature-number {
-      font-family: var(--font-main);
-      font-size: 48px;
-      font-weight: 300;
-      margin-bottom: 8px;
-    }
-    
-    .feature-text {
-      font-size: 12px;
-      letter-spacing: 1px;
-      opacity: 0.8;
-    }
-    
-    /* ========== VIDEO SECTION ========== */
-    .video-section {
       position: relative;
-      height: 80vh;
+    }
+
+    .hero-image-wrapper {
+      position: relative;
+      border-radius: 20px;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      opacity: 0;
+      transform: scale(0.95);
     }
-    
-    .video-bg {
+
+    .hero-image-main {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.8s var(--transition-smooth);
+    }
+
+    .hero-image-wrapper:hover .hero-image-main {
+      transform: scale(1.03);
+    }
+
+    .hero-image-overlay {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(79, 88, 86, 0.4) 100%);
+      pointer-events: none;
     }
-    
-    /* Фоновое изображение секции */
-    .video-placeholder {
+
+    .hero-badge {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('./public/images/GncO_b-uaNqLeEGK81TnLTenZbi4dpYU1sThR_24kTx5SL89PSQEZ-HB1_waQUT636qIJKxnLQNtQyRh8w9jmMdh.webp');
-      background-size: cover;
-      background-position: center;
+      bottom: 30px;
+      left: 30px;
+      background: var(--color-white);
+      padding: 20px 28px;
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transform: translateY(20px);
     }
-    
-    .video-placeholder-pattern {
-      display: none;
+
+    .hero-badge-number {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--color-bronze);
+      line-height: 1;
     }
-    
-    .video-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(44, 44, 44, 0.4);
-    }
-    
-    .video-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      color: white;
-      max-width: 700px;
-      padding: 0 24px;
-    }
-    
-    .video-quote {
-      font-family: var(--font-accent);
-      font-size: clamp(32px, 5vw, 56px);
-      line-height: 1.3;
-      margin-bottom: 32px;
-    }
-    
-    .video-author {
+
+    .hero-badge-text {
       font-size: 12px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      opacity: 0.7;
+      color: var(--color-text-muted);
+      margin-top: 4px;
     }
-    
-    .play-btn {
-      width: 100px;
-      height: 100px;
-      border: 2px solid white;
-      border-radius: 50%;
-      background: transparent;
-      color: white;
-      font-size: 24px;
-      cursor: pointer;
-      margin-top: 48px;
-      transition: all 0.4s;
+
+    .hero-floating-card {
+      position: absolute;
+      top: 40px;
+      right: -30px;
+      background: var(--color-white);
+      padding: 16px 20px;
+      border-radius: 12px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+      transform: translateX(20px);
+    }
+
+    .floating-card-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--color-cream);
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
+      color: var(--color-bronze);
     }
-    
-    .play-btn:hover {
-      background: white;
-      color: var(--color-primary);
-      transform: scale(1.1);
+
+    .floating-card-text {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-truffle);
     }
-    
-    /* ========== CATEGORIES PREVIEW ========== */
-    .categories-preview {
-      padding: 120px 48px;
+
+    .floating-card-sub {
+      font-size: 11px;
+      color: var(--color-text-muted);
     }
-    
+
+
+    /* ========== CATEGORIES SECTION ========== */
+    .categories-section {
+      padding: 120px 60px;
+      background: var(--color-white);
+    }
+
     .section-header {
       display: flex;
       justify-content: space-between;
@@ -429,36 +505,49 @@
       margin-left: auto;
       margin-right: auto;
     }
-    
+
+    .section-header-left {
+      max-width: 500px;
+    }
+
     .section-label {
       font-size: 11px;
-      letter-spacing: 3px;
+      font-weight: 600;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--color-secondary);
-      margin-bottom: 16px;
+      color: var(--color-bronze);
+      margin-bottom: 12px;
     }
-    
+
     .section-title {
-      font-family: var(--font-accent);
-      font-size: 48px;
-      color: var(--color-dark);
+      font-size: 40px;
+      font-weight: 300;
+      color: var(--color-truffle);
+      letter-spacing: -0.5px;
     }
-    
+
     .section-link {
-      font-size: 12px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--color-primary);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-truffle);
       display: flex;
       align-items: center;
       gap: 8px;
-      transition: gap 0.3s;
+      transition: all 0.3s var(--transition-smooth);
     }
-    
+
+    .section-link svg {
+      transition: transform 0.3s var(--transition-smooth);
+    }
+
     .section-link:hover {
-      gap: 16px;
+      color: var(--color-bronze);
     }
-    
+
+    .section-link:hover svg {
+      transform: translateX(4px);
+    }
+
     .categories-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -466,244 +555,608 @@
       max-width: 1400px;
       margin: 0 auto;
     }
-    
+
     .category-card {
       position: relative;
       aspect-ratio: 3/4;
+      border-radius: 16px;
       overflow: hidden;
       cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.5s var(--transition-smooth),
+        box-shadow 0.5s var(--transition-smooth);
     }
-    
+
+    .category-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+    }
+
     .category-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: transform 0.8s var(--transition-smooth);
     }
-    
+
     .category-card:hover img {
-      transform: scale(1.1);
+      transform: scale(1.08);
     }
-    
+
     .category-card-overlay {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 32px 24px;
-      background: linear-gradient(transparent, rgba(107, 91, 79, 0.9));
-      color: white;
+      padding: 40px 28px;
+      background: linear-gradient(transparent, rgba(79, 88, 86, 0.95));
+      color: var(--color-white);
     }
-    
+
     .category-card-name {
-      font-size: 20px;
-      margin-bottom: 4px;
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 6px;
     }
-    
+
     .category-card-count {
-      font-size: 12px;
+      font-size: 13px;
       opacity: 0.7;
     }
-    
-    /* ========== PRODUCTS PREVIEW ========== */
-    .products-preview {
-      padding: 120px 48px;
-      background: var(--color-surface);
+
+    .category-card-arrow {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-white);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s var(--transition-smooth);
     }
-    
-    .products-grid {
+
+    .category-card:hover .category-card-arrow {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========== QUOTE SECTION ========== */
+    .quote-section {
+      position: relative;
+      padding: 160px 60px;
+      background: var(--color-cream);
+      overflow: hidden;
+    }
+
+    .quote-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: clamp(150px, 20vw, 300px);
+      font-weight: 600;
+      color: rgba(154, 128, 103, 0.05);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .quote-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .quote-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--color-bronze);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 40px;
+      color: var(--color-white);
+    }
+
+    .quote-text {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 300;
+      line-height: 1.4;
+      color: var(--color-truffle);
+      margin-bottom: 32px;
+    }
+
+    .quote-author {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-bronze);
+    }
+
+
+    /* ========== SERVICES SECTION ========== */
+    .services-section {
+      padding: 120px 60px;
+      background: var(--color-white);
+    }
+
+    .services-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
       max-width: 1400px;
       margin: 0 auto;
     }
-    
-    .product-card {
-      background: var(--color-bg);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    
-    .product-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-    }
-    
-    .product-card-image {
-      aspect-ratio: 1;
+
+    .service-card {
+      padding: 48px 40px;
+      background: var(--color-cream-light);
+      border-radius: 20px;
+      transition: all 0.5s var(--transition-smooth);
+      position: relative;
       overflow: hidden;
     }
-    
-    .product-card-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s;
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--color-bronze);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s var(--transition-smooth);
     }
-    
-    .product-card:hover .product-card-image img {
-      transform: scale(1.05);
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.06);
     }
-    
-    .product-card-content {
-      padding: 24px;
+
+    .service-card:hover::before {
+      transform: scaleX(1);
     }
-    
-    .product-card-category {
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--color-secondary);
-      margin-bottom: 8px;
+
+    .service-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--color-cream);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+      color: var(--color-bronze);
+      transition: all 0.4s var(--transition-smooth);
     }
-    
-    .product-card-name {
-      font-size: 16px;
+
+    .service-card:hover .service-icon {
+      background: var(--color-bronze);
+      color: var(--color-white);
+    }
+
+    .service-title {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--color-truffle);
       margin-bottom: 12px;
-      color: var(--color-dark);
     }
-    
-    .product-card-price {
-      font-size: 18px;
-      color: var(--color-primary);
-      font-weight: 400;
+
+    .service-desc {
+      font-size: 14px;
+      color: var(--color-text-muted);
+      line-height: 1.7;
     }
-    
+
     /* ========== CTA SECTION ========== */
     .cta-section {
-      padding: 120px 48px;
-      background: var(--color-dark);
+      padding: 120px 60px;
+      background: var(--color-truffle);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-bg-shape {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: rgba(154, 128, 103, 0.1);
+      pointer-events: none;
+    }
+
+    .cta-bg-shape:first-child {
+      top: -200px;
+      left: -200px;
+    }
+
+    .cta-bg-shape:nth-child(2) {
+      bottom: -300px;
+      right: -200px;
+    }
+
+    .cta-content {
+      max-width: 700px;
+      margin: 0 auto;
       text-align: center;
-      color: white;
+      position: relative;
+      z-index: 2;
     }
-    
+
     .cta-title {
-      font-family: var(--font-accent);
-      font-size: 48px;
+      font-size: 44px;
+      font-weight: 300;
+      color: var(--color-cream);
       margin-bottom: 20px;
+      letter-spacing: -0.5px;
     }
-    
+
     .cta-text {
-      font-size: 16px;
-      opacity: 0.7;
+      font-size: 17px;
+      color: rgba(232, 224, 213, 0.7);
       max-width: 500px;
       margin: 0 auto 40px;
+      line-height: 1.7;
     }
-    
-    .cta-btn {
-      padding: 20px 48px;
-      background: var(--color-secondary);
-      border: none;
-      color: white;
+
+    .cta-form {
+      display: flex;
+      gap: 12px;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+
+    .cta-input {
+      flex: 1;
+      padding: 18px 24px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 100px;
+      color: var(--color-cream);
       font-family: var(--font-main);
-      font-size: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.3s var(--transition-smooth);
+    }
+
+    .cta-input::placeholder {
+      color: rgba(232, 224, 213, 0.5);
+    }
+
+    .cta-input:focus {
+      border-color: var(--color-bronze);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .cta-submit {
+      padding: 18px 36px;
+      background: var(--color-bronze);
+      border: none;
+      border-radius: 100px;
+      color: var(--color-white);
+      font-family: var(--font-main);
+      font-size: 14px;
+      font-weight: 500;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: all 0.4s var(--transition-smooth);
     }
-    
-    .cta-btn:hover {
-      background: var(--color-accent);
+
+    .cta-submit:hover {
+      background: var(--color-bronze-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 15px 40px rgba(154, 128, 103, 0.4);
     }
-    
+
     /* ========== FOOTER ========== */
     .footer {
-      padding: 60px 48px;
-      background: var(--color-primary);
-      color: var(--color-bg);
+      padding: 80px 60px 40px;
+      background: var(--color-truffle-dark);
+      color: var(--color-cream);
     }
-    
-    .footer-content {
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      max-width: 1400px;
+      margin: 0 auto 60px;
+    }
+
+    .footer-brand {
+      max-width: 280px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo-img {
+      height: 44px;
+      width: auto;
+    }
+
+    .footer-logo-name {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--color-cream);
+      letter-spacing: 0.5px;
+    }
+
+    .footer-desc {
+      font-size: 14px;
+      color: rgba(232, 224, 213, 0.6);
+      line-height: 1.7;
+    }
+
+    .footer-col h4 {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(232, 224, 213, 0.4);
+      margin-bottom: 24px;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 14px;
+      color: rgba(232, 224, 213, 0.8);
+      margin-bottom: 14px;
+      transition: all 0.3s var(--transition-smooth);
+    }
+
+    .footer-col a:hover {
+      color: var(--color-cream);
+      transform: translateX(4px);
+    }
+
+    .footer-bottom {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
       max-width: 1400px;
       margin: 0 auto;
     }
-    
-    .footer-logo-wrap {
+
+    .footer-copy {
+      font-size: 13px;
+      color: rgba(232, 224, 213, 0.4);
+    }
+
+    .footer-socials {
       display: flex;
-      align-items: center;
       gap: 16px;
     }
-    
-    .footer-logo-img {
-      height: 50px;
-      width: auto;
-    }
-    
-    .footer-logo-text {
+
+    .footer-social {
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: rgba(232, 224, 213, 0.6);
+      transition: all 0.3s var(--transition-smooth);
     }
-    
-    .footer-logo-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      font-weight: 500;
-      color: var(--color-bg);
-    }
-    
-    .footer-logo-tagline {
-      font-size: 11px;
-      color: rgba(245, 242, 235, 0.7);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-    
-    .footer-links {
-      display: flex;
-      gap: 40px;
-    }
-    
-    .footer-links a {
-      font-size: 12px;
-      letter-spacing: 1px;
-      color: var(--color-bg);
-      transition: opacity 0.3s;
-    }
-    
-    .footer-links a:hover {
-      opacity: 0.7;
-    }
-    
-    .footer-copy {
-      font-size: 11px;
-      color: rgba(245, 242, 235, 0.5);
+
+    .footer-social:hover {
+      background: var(--color-bronze);
+      color: var(--color-white);
+      transform: translateY(-3px);
     }
 
     /* ========== RESPONSIVE ========== */
+    @media (max-width: 1200px) {
+      .hero-grid {
+        gap: 40px;
+      }
+
+      .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     @media (max-width: 1024px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .hero-bg { display: none; }
-      .hero-image { order: -1; }
-      .hero-image-main { height: 400px; }
-      .hero-image-badge { left: 20px; bottom: -20px; }
-      .features-strip { grid-template-columns: repeat(2, 1fr); }
-      .categories-grid { grid-template-columns: repeat(2, 1fr); }
-      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero {
+        padding: 100px 40px 60px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image {
+        margin-top: 40px;
+      }
     }
 
     @media (max-width: 768px) {
-      .header { padding: 16px 24px; }
-      .nav { display: none; }
-      .header-cta { display: none; }
-      .hero { padding: 100px 24px 60px; }
-      .hero-content { padding-right: 0; }
-      .features-strip { grid-template-columns: 1fr; }
-      .categories-preview { padding: 80px 24px; }
-      .categories-grid { grid-template-columns: 1fr; }
-      .products-preview { padding: 80px 24px; }
-      .products-grid { grid-template-columns: 1fr; }
-      .cta-section { padding: 80px 24px; }
-      .footer { padding: 40px 24px; }
-      .footer-content { flex-direction: column; gap: 24px; text-align: center; }
-      .footer-links { flex-wrap: wrap; justify-content: center; }
+      .header {
+        padding: 0 24px;
+        height: 70px;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .header-phone {
+        display: none;
+      }
+
+      .hero {
+        padding: 100px 24px 60px;
+      }
+
+      .hero-title-accent {
+        font-size: clamp(40px, 10vw, 52px);
+      }
+      
+      .hero-title-sub {
+        font-size: clamp(18px, 4vw, 24px);
+      }
+
+      .categories-section {
+        padding: 80px 24px;
+      }
+
+      .categories-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quote-section {
+        padding: 100px 24px;
+      }
+
+      .services-section {
+        padding: 80px 24px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-section {
+        padding: 80px 24px;
+      }
+
+      .cta-form {
+        flex-direction: column;
+      }
+
+      .footer {
+        padding: 60px 24px 30px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
+    }
+
+    /* ========== PAGE LOADER ========== */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--color-cream-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.6s, visibility 0.6s;
+    }
+
+    .loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-content {
+      text-align: center;
+    }
+
+    .loader-logo {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    .loader-bar {
+      width: 120px;
+      height: 3px;
+      background: var(--color-border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .loader-progress {
+      height: 100%;
+      background: var(--color-bronze);
+      animation: loading 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+      }
+    }
+
+    @keyframes loading {
+      0% {
+        width: 0;
+        margin-left: 0;
+      }
+
+      50% {
+        width: 100%;
+        margin-left: 0;
+      }
+
+      100% {
+        width: 0;
+        margin-left: 100%;
+      }
     }
   </style>
 </head>
+
 <body>
+
+  <!-- PAGE LOADER -->
+  <div class="loader">
+    <div class="loader-content">
+      <img src="./public/images/logo.webp" alt="Декор Комплект" class="loader-logo">
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- HEADER -->
   <header class="header">
@@ -717,207 +1170,383 @@
     <nav class="nav">
       <a href="index.html">Главная</a>
       <a href="catalog.html">Каталог</a>
-      <a href="#">О нас</a>
+      <a href="#">О компании</a>
       <a href="#">Контакты</a>
     </nav>
-    <a href="#" class="header-cta">Консультация</a>
+    <div class="header-right">
+      <a href="tel:+73517277339" class="header-phone">+7 351 727-73-39</a>
+      <a href="#" class="header-cta">Консультация</a>
+    </div>
   </header>
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-bg"></div>
+    <div class="hero-bg-pattern"></div>
     <div class="hero-grid">
       <div class="hero-content">
         <div class="hero-label">
           <span class="hero-label-line"></span>
-          <span class="hero-label-text">Челябинск с 2009 года</span>
+          <span class="hero-label-text">С 2009 года в Челябинске</span>
         </div>
         <h1 class="hero-title">
-          Открой - свой цвет<br>
-          <span class="accent">С нами легко</span>
+          <span class="hero-title-accent">Открой свой цвет</span>
+          <span class="hero-title-sub">С нами легко</span>
         </h1>
         <p class="hero-text">
           Премиальные декоративные покрытия от ведущих мировых производителей.
+          Штукатурка, краски, обои и фрески для вашего идеального пространства.
         </p>
         <div class="hero-buttons">
           <a href="catalog.html" class="btn btn-primary">
-            Каталог
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            Смотреть каталог
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
           </a>
-          <a href="#" class="btn btn-secondary">Консультация</a>
+          <a href="#" class="btn btn-secondary">Получить консультацию</a>
         </div>
       </div>
       <div class="hero-image">
-        <img src="./public/images/EN4LWs-4M-pPutx2FVyLhTx_wTnO30jqmPIzZJidAovx90GUNtu7iEiJ0v06F3FZi1A02jwtfKz9igAokTKXKTWf.webp" alt="Декоративная штукатурка" class="hero-image-main">
-        <div class="hero-image-badge">
+        <div class="hero-image-wrapper">
+          <img
+            src="./public/images/eYPy5_3n3tJ5d5ebWazQneW8cfk-OaopdJg7A0ZD2T0feZax92_MPMptJTeTYEV7MpNDwXDf9N2z8EIk_8Bdlm8n.webp"
+            alt="Декоративная штукатурка" class="hero-image-main">
+          <div class="hero-image-overlay"></div>
+        </div>
+        <div class="hero-badge">
           <div class="hero-badge-number">15+</div>
           <div class="hero-badge-text">лет опыта</div>
+        </div>
+        <div class="hero-floating-card">
+          <div class="floating-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <div>
+            <div class="floating-card-text">Гарантия качества</div>
+            <div class="floating-card-sub">Официальный дилер</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FEATURES STRIP -->
-  <section class="features-strip">
-    <div class="feature-item">
-      <div class="feature-number">50+</div>
-      <div class="feature-text">Брендов</div>
-    </div>
-    <div class="feature-item">
-      <div class="feature-number">5000+</div>
-      <div class="feature-text">Товаров</div>
-    </div>
-    <div class="feature-item">
-      <div class="feature-number">2</div>
-      <div class="feature-text">Филиала</div>
-    </div>
-    <div class="feature-item">
-      <div class="feature-number">10000+</div>
-      <div class="feature-text">Клиентов</div>
-    </div>
-  </section>
 
-  <!-- VIDEO / QUOTE SECTION -->
-  <section class="video-section">
-    <div class="video-placeholder"></div>
-    <div class="video-placeholder-pattern"></div>
-    <!-- Раскомментировать когда будет видео:
-    <video class="video-bg" autoplay muted loop playsinline>
-      <source src="video/texture.mp4" type="video/mp4">
-    </video>
-    -->
-    <div class="video-overlay"></div>
-    <div class="video-content">
-      <p class="video-quote">Интерьер — это отражение вашей души</p>
-      <span class="video-author">— Философия Декор Комплект</span>
-    </div>
-  </section>
-
-  <!-- CATEGORIES PREVIEW -->
-  <section class="categories-preview">
+  <!-- CATEGORIES SECTION -->
+  <section class="categories-section">
     <div class="section-header">
-      <div></div>
       <a href="catalog.html" class="section-link">
-        Весь каталог →
+        Все категории
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
       </a>
     </div>
-    
+
     <div class="categories-grid">
       <a href="catalog.html" class="category-card">
-        <img src="./public/images/-1h3uUw4nt-2G2k6A_qz2lDA5hJA1h1Zxig1S02t95xRPZaGzuN_cwWh0eqqi68Yte_lAZF705PLRHiTMm4NZhos.webp" alt="Краски">
+        <img
+          src="./public/images/-1h3uUw4nt-2G2k6A_qz2lDA5hJA1h1Zxig1S02t95xRPZaGzuN_cwWh0eqqi68Yte_lAZF705PLRHiTMm4NZhos.webp"
+          alt="Краски">
         <div class="category-card-overlay">
           <h3 class="category-card-name">Краски</h3>
           <span class="category-card-count">24 товара</span>
         </div>
+        <div class="category-card-arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </div>
       </a>
       <a href="catalog.html" class="category-card">
-        <img src="./public/images/EN4LWs-4M-pPutx2FVyLhTx_wTnO30jqmPIzZJidAovx90GUNtu7iEiJ0v06F3FZi1A02jwtfKz9igAokTKXKTWf.webp" alt="Штукатурка">
+        <img
+          src="./public/images/EN4LWs-4M-pPutx2FVyLhTx_wTnO30jqmPIzZJidAovx90GUNtu7iEiJ0v06F3FZi1A02jwtfKz9igAokTKXKTWf.webp"
+          alt="Штукатурка">
         <div class="category-card-overlay">
           <h3 class="category-card-name">Штукатурка</h3>
           <span class="category-card-count">18 товаров</span>
         </div>
+        <div class="category-card-arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </div>
       </a>
       <a href="catalog.html" class="category-card">
-        <img src="./public/images/GncO_b-uaNqLeEGK81TnLTenZbi4dpYU1sThR_24kTx5SL89PSQEZ-HB1_waQUT636qIJKxnLQNtQyRh8w9jmMdh.webp" alt="Обои">
+        <img
+          src="./public/images/GncO_b-uaNqLeEGK81TnLTenZbi4dpYU1sThR_24kTx5SL89PSQEZ-HB1_waQUT636qIJKxnLQNtQyRh8w9jmMdh.webp"
+          alt="Обои">
         <div class="category-card-overlay">
           <h3 class="category-card-name">Обои</h3>
           <span class="category-card-count">36 товаров</span>
         </div>
+        <div class="category-card-arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </div>
       </a>
       <a href="catalog.html" class="category-card">
-        <img src="./public/images/NFHSDUk7hCs2n7OwJTP36Z24XZj6F2jkd1N8rkY1nySx47Etk_SEoDPcaFVZy12_Zm-QN5pIx8WXzQUAUOCo04Zr.webp" alt="Фрески">
+        <img
+          src="./public/images/NFHSDUk7hCs2n7OwJTP36Z24XZj6F2jkd1N8rkY1nySx47Etk_SEoDPcaFVZy12_Zm-QN5pIx8WXzQUAUOCo04Zr.webp"
+          alt="Фрески">
         <div class="category-card-overlay">
           <h3 class="category-card-name">Фрески</h3>
           <span class="category-card-count">12 товаров</span>
         </div>
+        <div class="category-card-arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </div>
       </a>
+    </div>
+  </section>
+
+  <!-- QUOTE SECTION -->
+  <section class="quote-section">
+    <div class="quote-bg-text">DECOR</div>
+    <div class="quote-content">
+      <div class="quote-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+        </svg>
+      </div>
+      <p class="quote-text">
+        Интерьер — это пространство, которое рассказывает вашу историю
+      </p>
+      <span class="quote-author">Философия Декор Комплект</span>
+    </div>
+  </section>
+
+
+  <!-- SERVICES SECTION -->
+  <section class="services-section">
+    <div class="section-header">
+      <div class="section-header-left">
+        <div class="section-label">Сервис</div>
+        <h2 class="section-title">Почему выбирают нас</h2>
+      </div>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </div>
+        <h3 class="service-title">Гарантия качества</h3>
+        <p class="service-desc">Работаем только с проверенными производителями. Вся продукция сертифицирована и имеет
+          гарантию.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="1" y="3" width="15" height="13"></rect>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+          </svg>
+        </div>
+        <h3 class="service-title">Быстрая доставка</h3>
+        <p class="service-desc">Доставка по Челябинску от 500₽. Бесплатно при заказе от 15 000₽. Отправляем по всей
+          России.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+        </div>
+        <h3 class="service-title">Экспертная консультация</h3>
+        <p class="service-desc">Наши специалисты помогут подобрать материалы под ваш проект и рассчитают точное
+          количество.</p>
+      </div>
     </div>
   </section>
 
   <!-- CTA SECTION -->
   <section class="cta-section">
-    <h2 class="cta-title">Нужна консультация?</h2>
-    <p class="cta-text">Наши специалисты помогут подобрать идеальные материалы для вашего проекта</p>
-    <button class="cta-btn">Связаться с нами</button>
+    <div class="cta-bg-shape"></div>
+    <div class="cta-bg-shape"></div>
+    <div class="cta-content">
+      <h2 class="cta-title">Нужна консультация?</h2>
+      <p class="cta-text">Оставьте заявку и наш специалист свяжется с вами в течение 15 минут</p>
+      <form class="cta-form">
+        <input type="tel" class="cta-input" placeholder="Ваш телефон">
+        <button type="submit" class="cta-submit">Перезвоните мне</button>
+      </form>
+    </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-logo-wrap">
-        <img src="./public/images/logo.webp" alt="Декор Комплект" class="footer-logo-img">
-        <div class="footer-logo-text">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <img src="./public/images/logo.webp" alt="Декор Комплект" class="footer-logo-img">
           <span class="footer-logo-name">Декор Комплект</span>
-          <span class="footer-logo-tagline">Салон декоративных покрытий</span>
-        </div>
+        </a>
+        <p class="footer-desc">Премиальные декоративные покрытия для создания уникальных интерьеров. Работаем с 2009
+          года.</p>
       </div>
-      <div class="footer-links">
-        <a href="catalog.html">Каталог</a>
+      <div class="footer-col">
+        <h4>Каталог</h4>
+        <a href="catalog.html">Краски</a>
+        <a href="catalog.html">Штукатурка</a>
+        <a href="catalog.html">Обои</a>
+        <a href="catalog.html">Фрески</a>
+      </div>
+      <div class="footer-col">
+        <h4>Компания</h4>
         <a href="#">О нас</a>
         <a href="#">Контакты</a>
-        <a href="tel:+73517277339">8 (351) 727-73-39</a>
+        <a href="#">Доставка</a>
+        <a href="#">Оплата</a>
       </div>
-      <div class="footer-copy">© 2026</div>
+      <div class="footer-col">
+        <h4>Контакты</h4>
+        <a href="tel:+73517277339">8 (351) 727-73-39</a>
+        <a href="#">ул. Коммуны, 127</a>
+        <a href="#">ул. Труда, 174</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2009–2026 Декор Комплект. Все права защищены.</span>
+      <div class="footer-socials">
+        <a href="#" class="footer-social">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+          </svg>
+        </a>
+        <a href="#" class="footer-social">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+          </svg>
+        </a>
+        <a href="#" class="footer-social">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.053 5.56-5.023c.242-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.654-.64.135-.954l11.566-4.458c.538-.196 1.006.128.833.941z" />
+          </svg>
+        </a>
+      </div>
     </div>
   </footer>
 
   <script>
     gsap.registerPlugin(ScrollTrigger);
 
-    // Hero animations
-    gsap.to('.hero-label', { opacity: 1, y: 0, duration: 0.8, delay: 0.3 });
-    gsap.to('.hero-title', { opacity: 1, y: 0, duration: 1, delay: 0.5 });
-    gsap.to('.hero-text', { opacity: 1, y: 0, duration: 0.8, delay: 0.7 });
-    gsap.to('.hero-buttons', { opacity: 1, y: 0, duration: 0.8, delay: 0.9 });
-    gsap.to('.hero-image-main', { opacity: 1, scale: 1, duration: 1.2, delay: 0.4 });
-    gsap.to('.hero-image-badge', { opacity: 1, y: 0, duration: 0.8, delay: 1.1 });
-
-    // Features counter animation
-    ScrollTrigger.batch('.feature-number', {
-      onEnter: batch => {
-        batch.forEach(el => {
-          const target = parseInt(el.textContent);
-          gsap.fromTo(el, 
-            { innerText: 0 },
-            {
-              innerText: target,
-              duration: 2,
-              snap: { innerText: 1 },
-              onUpdate: function() {
-                el.textContent = Math.round(this.targets()[0].innerText) + (target > 100 ? '+' : '');
-              }
-            }
-          );
-        });
-      },
-      start: 'top 80%',
-      once: true
+    // Page loader
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.querySelector('.loader').classList.add('hidden');
+      }, 800);
     });
 
-    // Video section parallax
-    gsap.to('.video-placeholder-pattern', {
-      yPercent: 20,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.video-section',
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: true
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('.header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
       }
     });
 
-    // Category cards stagger
+    // Hero animations
+    const heroTl = gsap.timeline({ delay: 1 });
+    heroTl
+      .to('.hero-label', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
+      .to('.hero-title', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.5')
+      .to('.hero-text', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
+      .to('.hero-buttons', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5')
+      .to('.hero-image-wrapper', { opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out' }, '-=1')
+      .to('.hero-badge', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
+      .to('.hero-floating-card', { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5');
+
+    // Category cards animation with tilt effect
     gsap.utils.toArray('.category-card').forEach((card, i) => {
-      gsap.fromTo(card, 
-        { opacity: 0, y: 60 },
+      gsap.fromTo(card,
+        { opacity: 0, y: 80 },
         {
           opacity: 1,
           y: 0,
           duration: 0.8,
+          delay: i * 0.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%'
+          }
+        }
+      );
+
+      // Tilt effect
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 20;
+        const rotateY = (centerX - x) / 20;
+
+        gsap.to(card, {
+          rotateX: rotateX,
+          rotateY: rotateY,
+          duration: 0.5,
+          ease: 'power2.out',
+          transformPerspective: 1000
+        });
+      });
+
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, {
+          rotateX: 0,
+          rotateY: 0,
+          duration: 0.5,
+          ease: 'power2.out'
+        });
+      });
+    });
+
+    // Quote section parallax
+    gsap.to('.quote-bg-text', {
+      xPercent: 10,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.quote-section',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1
+      }
+    });
+
+
+    // Service cards animation
+    gsap.utils.toArray('.service-card').forEach((card, i) => {
+      gsap.fromTo(card,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
           delay: i * 0.15,
+          ease: 'power3.out',
           scrollTrigger: {
             trigger: card,
             start: 'top 85%'
@@ -926,23 +1555,47 @@
       );
     });
 
-    // Product cards stagger
-    gsap.utils.toArray('.product-card').forEach((card, i) => {
-      gsap.fromTo(card, 
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          delay: i * 0.1,
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 90%'
-          }
+    // CTA section animation
+    gsap.fromTo('.cta-content',
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.cta-section',
+          start: 'top 75%'
         }
-      );
+      }
+    );
+
+    // Magnetic button effect
+    document.querySelectorAll('.btn-primary, .header-cta, .cta-submit').forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        gsap.to(btn, {
+          x: x * 0.2,
+          y: y * 0.2,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      });
+
+      btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, {
+          x: 0,
+          y: 0,
+          duration: 0.5,
+          ease: 'elastic.out(1, 0.5)'
+        });
+      });
     });
   </script>
 
 </body>
+
 </html>

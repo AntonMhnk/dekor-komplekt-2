@@ -4,78 +4,117 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Штукатурка Venice Premium — Декор Комплект</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   
   <style>
+    /* Local Fonts */
+    @font-face {
+      font-family: 'Montserrat';
+      src: url('./public/fonts/Montserrat/Montserrat-VariableFont_wght.ttf') format('truetype');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Montserrat';
+      src: url('./public/fonts/Montserrat/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');
+      font-weight: 100 900;
+      font-style: italic;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Playfair Display';
+      src: url('./public/fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
+      font-weight: 400 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Playfair Display';
+      src: url('./public/fonts/Playfair_Display/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('truetype');
+      font-weight: 400 900;
+      font-style: italic;
+      font-display: swap;
+    }
+    
     @font-face {
       font-family: 'Denistina';
       src: url('./public/fonts/denistina_en.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
     }
     
     :root {
-      --color-bg: #F5F2EB;
-      --color-bg-light: #FFFFFF;
-      --color-primary: #8B7355;
-      --color-secondary: #5A5A5A;
-      --color-accent: #A89078;
-      --color-text: #2C2C2C;
-      --color-text-light: #7A7A7A;
-      --color-border: #E8E4DC;
-      --color-dark: #6B5B4F;
-      --font-main: 'Montserrat', sans-serif;
+      --color-cream: #E8E0D5;
+      --color-cream-light: #F5F2ED;
+      --color-bronze: #9A8067;
+      --color-bronze-dark: #7D6652;
+      --color-truffle: #4F5856;
+      --color-truffle-dark: #3A4442;
+      --color-white: #FFFFFF;
+      --color-black: #1A1A1A;
+      --color-text: #2D2D2D;
+      --color-text-muted: #6B6B6B;
+      --color-border: #E0DCD6;
+      --color-success: #5B8C5A;
+      
+      --font-main: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-accent: 'Denistina', cursive;
-      --transition: 0.3s ease;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
       font-family: var(--font-main);
-      font-weight: 300;
-      font-size: 16px;
-      line-height: 1.6;
+      font-weight: 400;
+      background: var(--color-cream-light);
       color: var(--color-text);
-      background: var(--color-bg);
+      line-height: 1.6;
     }
     
-    a { color: inherit; text-decoration: none; transition: var(--transition); }
+    a { text-decoration: none; color: inherit; }
     img { max-width: 100%; height: auto; display: block; }
     
     .container {
       max-width: 1400px;
       margin: 0 auto;
-      padding: 0 48px;
+      padding: 0 60px;
     }
     
-    /* ===== HEADER ===== */
+    /* ========== HEADER ========== */
     .header {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       z-index: 1000;
-      padding: 20px 0;
-      background: rgba(245, 242, 235, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--color-border);
-    }
-    
-    .header .container {
+      padding: 0 60px;
+      height: 80px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      background: rgba(245, 242, 237, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
     }
     
     .logo {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
     
     .logo-img {
-      height: 50px;
+      height: 44px;
       width: auto;
     }
     
@@ -85,56 +124,108 @@
     }
     
     .logo-name {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--font-serif);
       font-size: 18px;
       font-weight: 500;
-      color: var(--color-text);
+      color: var(--color-truffle);
+      letter-spacing: 0.5px;
     }
     
     .logo-tagline {
       font-size: 10px;
-      color: var(--color-text-light);
-      letter-spacing: 1px;
+      color: var(--color-text-muted);
+      letter-spacing: 0.5px;
       text-transform: uppercase;
     }
     
     .nav {
       display: flex;
-      gap: 40px;
+      gap: 48px;
     }
     
     .nav a {
-      font-size: 12px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--color-text-light);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      color: var(--color-text-muted);
+      position: relative;
+      padding: 8px 0;
+      transition: color 0.3s var(--transition-smooth);
+    }
+    
+    .nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--color-bronze);
+      transition: width 0.4s var(--transition-smooth);
     }
     
     .nav a:hover,
     .nav a.active {
-      color: var(--color-primary);
+      color: var(--color-truffle);
+    }
+    
+    .nav a.active::after,
+    .nav a:hover::after {
+      width: 100%;
+    }
+    
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
     }
     
     .header-phone {
       font-size: 14px;
-      color: var(--color-text);
+      font-weight: 500;
+      color: var(--color-truffle);
     }
     
-    /* ===== BREADCRUMB ===== */
+    .header-cta {
+      padding: 12px 28px;
+      background: var(--color-truffle);
+      color: var(--color-white);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      border-radius: 100px;
+      transition: all 0.4s var(--transition-smooth);
+    }
+    
+    .header-cta:hover {
+      background: var(--color-bronze);
+      transform: translateY(-2px);
+    }
+    
+    /* ========== BREADCRUMB ========== */
     .breadcrumb {
       display: flex;
       align-items: center;
       gap: 12px;
       font-size: 13px;
-      color: var(--color-text-light);
-      margin-bottom: 32px;
+      color: var(--color-text-muted);
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    
+    .breadcrumb a {
+      transition: color 0.3s var(--transition-smooth);
     }
     
     .breadcrumb a:hover {
-      color: var(--color-primary);
+      color: var(--color-bronze);
     }
     
-    /* ===== PRODUCT PAGE ===== */
+    .breadcrumb span {
+      color: var(--color-border);
+    }
+    
+    /* ========== PRODUCT PAGE ========== */
     .product-page {
       padding: 120px 0 80px;
     }
@@ -143,14 +234,14 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
-      margin-bottom: 80px;
+      margin-bottom: 100px;
     }
     
     /* Gallery */
     .gallery {
       display: grid;
-      grid-template-columns: 80px 1fr;
-      gap: 16px;
+      grid-template-columns: 90px 1fr;
+      gap: 20px;
       position: sticky;
       top: 120px;
       height: fit-content;
@@ -163,19 +254,23 @@
     }
     
     .thumb {
-      width: 80px;
-      height: 80px;
+      width: 90px;
+      height: 90px;
       padding: 0;
-      border: 1px solid transparent;
-      background: none;
+      border: 2px solid transparent;
+      background: var(--color-white);
+      border-radius: 12px;
       cursor: pointer;
       overflow: hidden;
-      transition: var(--transition);
+      transition: all 0.3s var(--transition-smooth);
     }
     
-    .thumb.active,
-    .thumb:hover {
-      border-color: var(--color-primary);
+    .thumb.active {
+      border-color: var(--color-bronze);
+    }
+    
+    .thumb:hover:not(.active) {
+      border-color: var(--color-border);
     }
     
     .thumb img {
@@ -186,66 +281,143 @@
     
     .gallery-main {
       position: relative;
-      aspect-ratio: 1;
-      background: var(--color-bg-light);
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--color-white);
     }
     
     .gallery-main img {
       width: 100%;
-      height: 100%;
+      height: auto;
+      aspect-ratio: 1;
       object-fit: cover;
+      transition: transform 0.6s var(--transition-smooth);
     }
     
-    .tag {
+    .gallery-main:hover img {
+      transform: scale(1.03);
+    }
+    
+    .product-tag {
       position: absolute;
-      top: 20px;
-      left: 20px;
-      padding: 8px 16px;
-      font-size: 11px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      background: var(--color-primary);
-      color: white;
+      top: 24px;
+      left: 24px;
+      padding: 10px 20px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      background: var(--color-bronze);
+      color: var(--color-white);
+      border-radius: 100px;
+    }
+    
+    .gallery-zoom {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s var(--transition-smooth);
+    }
+    
+    .gallery-zoom svg {
+      width: 20px;
+      height: 20px;
+      color: var(--color-truffle);
+    }
+    
+    .gallery-zoom:hover {
+      background: var(--color-bronze);
+    }
+    
+    .gallery-zoom:hover svg {
+      color: var(--color-white);
     }
     
     /* Product Info */
+    .product-info {
+      padding-top: 20px;
+    }
+    
     .product-brand-line {
       display: flex;
-      gap: 12px;
+      align-items: center;
+      gap: 16px;
       font-size: 13px;
-      color: var(--color-text-light);
-      margin-bottom: 12px;
+      color: var(--color-text-muted);
+      margin-bottom: 16px;
+    }
+    
+    .product-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--color-cream);
+      border-radius: 100px;
+      font-weight: 500;
+      color: var(--color-truffle);
     }
     
     .product-title {
-      font-weight: 300;
+      font-weight: 400;
       font-size: 36px;
       letter-spacing: -0.5px;
-      margin-bottom: 24px;
-      color: var(--color-text);
+      margin-bottom: 20px;
+      color: var(--color-truffle);
+      line-height: 1.2;
+    }
+    
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    
+    .rating-stars {
+      display: flex;
+      gap: 4px;
+      color: var(--color-bronze);
+    }
+    
+    .rating-count {
+      font-size: 13px;
+      color: var(--color-text-muted);
     }
     
     .product-price-block {
       display: flex;
       align-items: baseline;
-      gap: 8px;
+      gap: 12px;
       margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--color-border);
     }
     
     .price-value {
-      font-size: 32px;
+      font-size: 36px;
+      font-weight: 500;
       color: var(--color-text);
     }
     
     .price-per {
-      font-size: 14px;
-      color: var(--color-text-light);
+      font-size: 15px;
+      color: var(--color-text-muted);
     }
     
     .product-desc {
       font-size: 15px;
-      color: var(--color-text-light);
-      line-height: 1.7;
+      color: var(--color-text-muted);
+      line-height: 1.8;
       margin-bottom: 32px;
     }
     
@@ -255,91 +427,132 @@
     }
     
     .option-row {
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
     
     .option-row label {
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       font-size: 13px;
-      color: var(--color-text-light);
-      margin-bottom: 12px;
+      font-weight: 500;
+      color: var(--color-truffle);
+      margin-bottom: 14px;
+    }
+    
+    .option-row label span {
+      font-weight: 400;
+      color: var(--color-text-muted);
     }
     
     .colors {
       display: flex;
-      gap: 10px;
+      gap: 12px;
     }
     
     .color-btn {
-      width: 32px;
-      height: 32px;
-      border: 1px solid var(--color-border);
+      width: 44px;
+      height: 44px;
+      border: 2px solid transparent;
+      border-radius: 12px;
       cursor: pointer;
-      transition: var(--transition);
+      transition: all 0.3s var(--transition-smooth);
+      position: relative;
     }
     
-    .color-btn.active,
-    .color-btn:hover {
-      border-color: var(--color-primary);
+    .color-btn.active {
+      border-color: var(--color-truffle);
+    }
+    
+    .color-btn:hover:not(.active) {
       transform: scale(1.1);
+    }
+    
+    .color-btn::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      width: 6px;
+      height: 6px;
+      background: var(--color-bronze);
+      border-radius: 50%;
+      transition: transform 0.3s var(--transition-smooth);
+    }
+    
+    .color-btn.active::after {
+      transform: translateX(-50%) scale(1);
     }
     
     .sizes {
       display: flex;
-      gap: 8px;
+      gap: 10px;
     }
     
     .size-btn {
-      padding: 10px 20px;
-      border: 1px solid var(--color-border);
-      background: transparent;
+      padding: 14px 24px;
+      border: 1.5px solid var(--color-border);
+      border-radius: 12px;
+      background: var(--color-white);
       font-family: var(--font-main);
       font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text);
       cursor: pointer;
-      transition: var(--transition);
+      transition: all 0.3s var(--transition-smooth);
     }
     
-    .size-btn.active,
-    .size-btn:hover {
-      background: var(--color-primary);
-      border-color: var(--color-primary);
-      color: white;
+    .size-btn.active {
+      background: var(--color-truffle);
+      border-color: var(--color-truffle);
+      color: var(--color-white);
+    }
+    
+    .size-btn:hover:not(.active) {
+      border-color: var(--color-bronze);
     }
     
     .qty-box {
       display: flex;
       align-items: center;
-      border: 1px solid var(--color-border);
+      border: 1.5px solid var(--color-border);
+      border-radius: 12px;
       width: fit-content;
+      overflow: hidden;
+      background: var(--color-white);
     }
     
     .qty-btn {
-      width: 44px;
-      height: 44px;
+      width: 50px;
+      height: 50px;
       display: flex;
       align-items: center;
       justify-content: center;
       background: transparent;
       border: none;
-      font-size: 18px;
+      font-size: 20px;
+      color: var(--color-truffle);
       cursor: pointer;
-      transition: var(--transition);
+      transition: all 0.3s var(--transition-smooth);
     }
     
     .qty-btn:hover {
-      background: var(--color-bg);
+      background: var(--color-cream-light);
     }
     
     .qty-box input {
-      width: 60px;
-      height: 44px;
+      width: 70px;
+      height: 50px;
       text-align: center;
       border: none;
-      border-left: 1px solid var(--color-border);
-      border-right: 1px solid var(--color-border);
+      border-left: 1.5px solid var(--color-border);
+      border-right: 1.5px solid var(--color-border);
       font-family: var(--font-main);
       font-size: 16px;
+      font-weight: 500;
       background: transparent;
+      color: var(--color-text);
     }
     
     .qty-box input:focus {
@@ -355,141 +568,215 @@
     
     .btn-cart {
       flex: 1;
-      padding: 18px 32px;
-      background: var(--color-primary);
-      color: white;
+      padding: 20px 36px;
+      background: var(--color-truffle);
+      color: var(--color-white);
       border: none;
+      border-radius: 14px;
       font-family: var(--font-main);
-      font-size: 14px;
-      letter-spacing: 0.5px;
+      font-size: 15px;
+      font-weight: 500;
       cursor: pointer;
-      transition: var(--transition);
-    }
-    
-    .btn-cart:hover {
-      background: var(--color-dark);
-    }
-    
-    .btn-heart {
-      width: 56px;
-      height: 56px;
+      transition: all 0.4s var(--transition-smooth);
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid var(--color-border);
-      background: transparent;
-      cursor: pointer;
-      transition: var(--transition);
+      gap: 10px;
     }
     
-    .btn-heart:hover {
-      border-color: var(--color-primary);
-      color: var(--color-primary);
+    .btn-cart svg {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .btn-cart:hover {
+      background: var(--color-bronze);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(154, 128, 103, 0.3);
+    }
+    
+    .btn-wishlist {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid var(--color-border);
+      border-radius: 14px;
+      background: var(--color-white);
+      cursor: pointer;
+      transition: all 0.3s var(--transition-smooth);
+    }
+    
+    .btn-wishlist svg {
+      width: 22px;
+      height: 22px;
+      color: var(--color-truffle);
+      transition: all 0.3s var(--transition-smooth);
+    }
+    
+    .btn-wishlist:hover {
+      border-color: var(--color-bronze);
+      background: rgba(154, 128, 103, 0.05);
+    }
+    
+    .btn-wishlist:hover svg {
+      color: var(--color-bronze);
+    }
+    
+    .btn-wishlist.active {
+      border-color: var(--color-bronze);
+      background: var(--color-bronze);
+    }
+    
+    .btn-wishlist.active svg {
+      color: var(--color-white);
+      fill: var(--color-white);
     }
     
     /* Benefits */
     .product-benefits {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 16px;
-      padding-top: 24px;
-      border-top: 1px solid var(--color-border);
+      padding: 28px;
+      background: var(--color-white);
+      border-radius: 16px;
     }
     
     .benefit {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-size: 14px;
-      color: var(--color-text-light);
+      gap: 14px;
     }
     
-    .benefit svg {
-      color: var(--color-primary);
+    .benefit-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--color-cream-light);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .benefit-icon svg {
+      width: 20px;
+      height: 20px;
+      color: var(--color-bronze);
+    }
+    
+    .benefit-text {
+      font-size: 13px;
+      color: var(--color-text);
+      line-height: 1.4;
+    }
+    
+    .benefit-text strong {
+      display: block;
+      font-weight: 500;
+      color: var(--color-truffle);
     }
     
     /* Tabs */
     .product-tabs {
-      border-top: 1px solid var(--color-border);
-      padding-top: 48px;
+      padding-top: 60px;
     }
     
     .tabs-nav {
       display: flex;
-      gap: 40px;
-      margin-bottom: 32px;
+      gap: 8px;
+      margin-bottom: 40px;
+      padding: 6px;
+      background: var(--color-white);
+      border-radius: 14px;
+      width: fit-content;
     }
     
     .tab-btn {
-      padding: 8px 0;
+      padding: 14px 28px;
       background: transparent;
       border: none;
+      border-radius: 10px;
       font-family: var(--font-main);
       font-size: 14px;
-      color: var(--color-text-light);
+      font-weight: 500;
+      color: var(--color-text-muted);
       cursor: pointer;
-      position: relative;
-      transition: var(--transition);
+      transition: all 0.3s var(--transition-smooth);
     }
     
-    .tab-btn::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--color-primary);
-      transition: var(--transition);
+    .tab-btn.active {
+      background: var(--color-truffle);
+      color: var(--color-white);
     }
     
-    .tab-btn.active,
-    .tab-btn:hover {
-      color: var(--color-text);
-    }
-    
-    .tab-btn.active::after {
-      width: 100%;
+    .tab-btn:hover:not(.active) {
+      color: var(--color-truffle);
     }
     
     .tab-panel {
       display: none;
+      background: var(--color-white);
+      border-radius: 20px;
+      padding: 40px;
     }
     
     .tab-panel.active {
       display: block;
     }
     
+    .tab-panel h3 {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--color-truffle);
+      margin-bottom: 20px;
+    }
+    
     .tab-panel p {
-      color: var(--color-text-light);
-      line-height: 1.7;
+      color: var(--color-text-muted);
+      line-height: 1.8;
       margin-bottom: 16px;
     }
     
-    .specs-table {
-      width: 100%;
-      max-width: 500px;
-      border-collapse: collapse;
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
     }
     
-    .specs-table tr {
+    .spec-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 16px 0;
       border-bottom: 1px solid var(--color-border);
     }
     
-    .specs-table td {
-      padding: 14px 0;
-      font-size: 14px;
+    .spec-item:nth-child(odd) {
+      padding-right: 40px;
+      border-right: 1px solid var(--color-border);
     }
     
-    .specs-table td:first-child {
-      color: var(--color-text-light);
-      width: 160px;
+    .spec-item:nth-child(even) {
+      padding-left: 40px;
+    }
+    
+    .spec-label {
+      font-size: 14px;
+      color: var(--color-text-muted);
+    }
+    
+    .spec-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text);
     }
     
     /* Related Products */
     .related-section {
-      padding: 80px 0;
-      background: var(--color-bg-light);
+      padding: 100px 0;
+      background: var(--color-white);
     }
     
     .section-header {
@@ -500,36 +787,49 @@
     }
     
     .section-title {
-      font-weight: 300;
       font-size: 32px;
-      color: var(--color-text);
+      font-weight: 400;
+      color: var(--color-truffle);
     }
     
-    .link-arrow {
+    .section-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-truffle);
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 14px;
-      color: var(--color-primary);
+      transition: all 0.3s var(--transition-smooth);
     }
     
-    .link-arrow span {
-      transition: var(--transition);
+    .section-link svg {
+      transition: transform 0.3s var(--transition-smooth);
     }
     
-    .link-arrow:hover span {
+    .section-link:hover {
+      color: var(--color-bronze);
+    }
+    
+    .section-link:hover svg {
       transform: translateX(4px);
     }
     
     .products-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
+      gap: 28px;
     }
     
     .product-card {
-      display: block;
-      background: var(--color-bg);
+      background: var(--color-cream-light);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.5s var(--transition-smooth);
+    }
+    
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.08);
     }
     
     .product-card-img {
@@ -541,7 +841,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: var(--transition);
+      transition: transform 0.6s var(--transition-smooth);
     }
     
     .product-card:hover .product-card-img img {
@@ -549,159 +849,143 @@
     }
     
     .product-card-info {
-      padding: 20px;
+      padding: 24px;
     }
     
     .product-card-cat {
       font-size: 11px;
+      font-weight: 500;
       letter-spacing: 1px;
       text-transform: uppercase;
-      color: var(--color-text-light);
+      color: var(--color-bronze);
+      margin-bottom: 8px;
     }
     
     .product-card-name {
-      font-weight: 300;
+      font-weight: 400;
       font-size: 15px;
-      margin: 8px 0 12px;
+      margin-bottom: 12px;
       line-height: 1.4;
-      color: var(--color-text);
+      color: var(--color-truffle);
     }
     
     .product-card-price {
-      font-size: 15px;
-      color: var(--color-primary);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--color-text);
     }
     
     /* Footer */
     .footer {
-      padding: 60px 0 30px;
-      background: var(--color-primary);
-      color: var(--color-bg);
+      padding: 80px 60px 40px;
+      background: var(--color-truffle-dark);
+      color: var(--color-cream);
     }
     
     .footer-grid {
       display: grid;
       grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 48px;
+      gap: 60px;
+      max-width: 1400px;
+      margin: 0 auto 60px;
     }
     
-    .footer-logo-wrap {
+    .footer-brand {
+      max-width: 280px;
+    }
+    
+    .footer-logo {
       display: flex;
       align-items: center;
-      gap: 16px;
-      margin-bottom: 12px;
+      gap: 12px;
+      margin-bottom: 20px;
     }
     
     .footer-logo-img {
-      height: 50px;
+      height: 44px;
       width: auto;
     }
     
-    .footer-logo-text {
-      display: flex;
-      flex-direction: column;
-    }
-    
     .footer-logo-name {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--font-serif);
       font-size: 18px;
       font-weight: 500;
-      color: var(--color-bg);
+      color: var(--color-cream);
+      letter-spacing: 0.5px;
     }
     
-    .footer-logo-tagline {
-      font-size: 11px;
-      color: rgba(245, 242, 235, 0.7);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-    
-    .footer-tagline {
-      font-size: 13px;
-      color: rgba(245, 242, 235, 0.7);
+    .footer-desc {
+      font-size: 14px;
+      color: rgba(232, 224, 213, 0.6);
+      line-height: 1.7;
     }
     
     .footer-col h4 {
-      font-weight: 300;
-      font-size: 11px;
-      letter-spacing: 2px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: rgba(245, 242, 235, 0.5);
-      margin-bottom: 20px;
+      color: rgba(232, 224, 213, 0.4);
+      margin-bottom: 24px;
     }
     
     .footer-col a {
       display: block;
       font-size: 14px;
-      color: var(--color-bg);
-      margin-bottom: 10px;
-      transition: var(--transition);
+      color: rgba(232, 224, 213, 0.8);
+      margin-bottom: 14px;
+      transition: all 0.3s var(--transition-smooth);
     }
     
     .footer-col a:hover {
-      opacity: 0.7;
+      color: var(--color-cream);
+      transform: translateX(4px);
     }
     
     .footer-bottom {
-      padding-top: 30px;
-      border-top: 1px solid rgba(245, 242, 235, 0.2);
-      font-size: 12px;
-      color: rgba(245, 242, 235, 0.5);
-      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .footer-copy {
+      font-size: 13px;
+      color: rgba(232, 224, 213, 0.4);
     }
     
     /* Responsive */
+    @media (max-width: 1200px) {
+      .product-grid { gap: 48px; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    
     @media (max-width: 1024px) {
-      .product-grid {
-        grid-template-columns: 1fr;
-        gap: 48px;
-      }
-      
-      .gallery {
-        position: static;
-        grid-template-columns: 1fr;
-      }
-      
-      .gallery-thumbs {
-        flex-direction: row;
-        order: 1;
-      }
-      
-      .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .product-grid { grid-template-columns: 1fr; }
+      .gallery { position: static; }
+      .container { padding: 0 40px; }
+      .specs-grid { grid-template-columns: 1fr; }
+      .spec-item { padding-right: 0 !important; padding-left: 0 !important; border-right: none !important; }
     }
     
     @media (max-width: 768px) {
-      .container {
-        padding: 0 24px;
-      }
-      
-      .nav {
-        display: none;
-      }
-      
-      .product-title {
-        font-size: 28px;
-      }
-      
-      .tabs-nav {
-        gap: 24px;
-      }
-      
-      .products-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
+      .header { padding: 0 24px; height: 70px; }
+      .nav, .header-phone { display: none; }
+      .container { padding: 0 24px; }
+      .product-title { font-size: 28px; }
+      .gallery { grid-template-columns: 1fr; }
+      .gallery-thumbs { flex-direction: row; order: 1; }
+      .thumb { width: 70px; height: 70px; }
+      .product-benefits { grid-template-columns: 1fr; }
+      .tabs-nav { width: 100%; overflow-x: auto; }
+      .products-grid { grid-template-columns: 1fr; }
+      .footer { padding: 60px 24px 30px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
     }
   </style>
 </head>
@@ -709,21 +993,22 @@
 
   <!-- Header -->
   <header class="header">
-    <div class="container">
-      <a href="index.html" class="logo">
-        <img src="./public/images/logo.webp" alt="Декор Комплект" class="logo-img">
-        <div class="logo-text">
-          <span class="logo-name">Декор Комплект</span>
-          <span class="logo-tagline">Салон декоративных покрытий</span>
-        </div>
-      </a>
-      <nav class="nav">
-        <a href="index.html">Главная</a>
-        <a href="catalog.html" class="active">Каталог</a>
-        <a href="#">О нас</a>
-        <a href="#">Контакты</a>
-      </nav>
+    <a href="index.html" class="logo">
+      <img src="./public/images/logo.webp" alt="Декор Комплект" class="logo-img">
+      <div class="logo-text">
+        <span class="logo-name">Декор Комплект</span>
+        <span class="logo-tagline">Салон декоративных покрытий</span>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Главная</a>
+      <a href="catalog.html" class="active">Каталог</a>
+      <a href="#">О компании</a>
+      <a href="#">Контакты</a>
+    </nav>
+    <div class="header-right">
       <a href="tel:+73517277339" class="header-phone">+7 351 727-73-39</a>
+      <a href="#" class="header-cta">Консультация</a>
     </div>
   </header>
 
@@ -756,38 +1041,63 @@
           </div>
           <div class="gallery-main">
             <img src="./public/images/EN4LWs-4M-pPutx2FVyLhTx_wTnO30jqmPIzZJidAovx90GUNtu7iEiJ0v06F3FZi1A02jwtfKz9igAokTKXKTWf.webp" alt="" id="mainImage">
-            <span class="tag">Бестселлер</span>
+            <span class="product-tag">Бестселлер</span>
+            <button class="gallery-zoom">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+            </button>
           </div>
         </div>
 
         <!-- Info -->
         <div class="product-info">
           <div class="product-brand-line">
-            <span>San Marco</span>
-            <span>·</span>
+            <span class="product-brand">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+              San Marco
+            </span>
             <span>Артикул: SM-VP-001</span>
           </div>
           
           <h1 class="product-title">Штукатурка Venice Premium</h1>
           
+          <div class="product-rating">
+            <div class="rating-stars">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <span class="rating-count">24 отзыва</span>
+          </div>
+          
           <div class="product-price-block">
             <span class="price-value">8 500 ₽</span>
-            <span class="price-per">/ 1 кг</span>
+            <span class="price-per">/ за 1 кг</span>
           </div>
 
           <p class="product-desc">
             Венецианская штукатурка премиум-класса с эффектом натурального мрамора. 
-            Создаёт роскошное глянцевое покрытие с глубиной цвета.
+            Создаёт роскошное глянцевое покрытие с глубиной цвета и неповторимой игрой света.
+            Идеально подходит для создания элегантных интерьеров.
           </p>
 
           <div class="product-options">
             <div class="option-row">
-              <label>Оттенок</label>
+              <label>Оттенок <span>— Ivory</span></label>
               <div class="colors">
-                <button class="color-btn active" style="background: #E8DED1;"></button>
-                <button class="color-btn" style="background: #C9B99A;"></button>
-                <button class="color-btn" style="background: #8B7355;"></button>
-                <button class="color-btn" style="background: #5A5A5A;"></button>
+                <button class="color-btn active" style="background: #E8DED1; border-radius: 12px;"></button>
+                <button class="color-btn" style="background: #C9B99A; border-radius: 12px;"></button>
+                <button class="color-btn" style="background: #9A8067; border-radius: 12px;"></button>
+                <button class="color-btn" style="background: #4F5856; border-radius: 12px;"></button>
+                <button class="color-btn" style="background: #3A4442; border-radius: 12px;"></button>
               </div>
             </div>
 
@@ -811,9 +1121,16 @@
           </div>
 
           <div class="product-actions">
-            <button class="btn-cart">Добавить в корзину</button>
-            <button class="btn-heart">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <button class="btn-cart">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+              Добавить в корзину
+            </button>
+            <button class="btn-wishlist" onclick="this.classList.toggle('active')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
               </svg>
             </button>
@@ -821,25 +1138,51 @@
 
           <div class="product-benefits">
             <div class="benefit">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="1" y="3" width="15" height="13"></rect>
-                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
-                <circle cx="5.5" cy="18.5" r="2.5"></circle>
-                <circle cx="18.5" cy="18.5" r="2.5"></circle>
-              </svg>
-              <span>Доставка по городу от 500 ₽</span>
+              <div class="benefit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="1" y="3" width="15" height="13"></rect>
+                  <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                  <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                  <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                </svg>
+              </div>
+              <div class="benefit-text">
+                <strong>Быстрая доставка</strong>
+                По Челябинску от 500 ₽
+              </div>
             </div>
             <div class="benefit">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-              </svg>
-              <span>Гарантия качества 5 лет</span>
+              <div class="benefit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+              <div class="benefit-text">
+                <strong>Гарантия качества</strong>
+                Официальный дилер
+              </div>
             </div>
             <div class="benefit">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              <span>В наличии на складе</span>
+              <div class="benefit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <div class="benefit-text">
+                <strong>В наличии</strong>
+                Отправка сегодня
+              </div>
+            </div>
+            <div class="benefit">
+              <div class="benefit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </div>
+              <div class="benefit-text">
+                <strong>Консультация</strong>
+                Бесплатный подбор
+              </div>
             </div>
           </div>
         </div>
@@ -850,25 +1193,57 @@
         <div class="tabs-nav">
           <button class="tab-btn active" data-tab="desc">Описание</button>
           <button class="tab-btn" data-tab="specs">Характеристики</button>
-          <button class="tab-btn" data-tab="delivery">Доставка</button>
+          <button class="tab-btn" data-tab="delivery">Доставка и оплата</button>
         </div>
         <div class="tabs-panels">
           <div class="tab-panel active" id="desc">
-            <p>Венецианская штукатурка Venice Premium — это эксклюзивный материал для создания роскошных интерьеров. Благодаря особой технологии производства, покрытие обладает глубоким цветом и натуральным блеском.</p>
-            <p>Материал изготовлен на основе натуральной мраморной крошки и специальных связующих компонентов.</p>
+            <h3>Венецианская штукатурка Venice Premium</h3>
+            <p>Venice Premium — это эксклюзивный материал для создания роскошных интерьеров. Благодаря особой технологии производства, покрытие обладает глубоким цветом и натуральным блеском, характерным для настоящего мрамора.</p>
+            <p>Материал изготовлен на основе натуральной мраморной крошки и специальных связующих компонентов, что обеспечивает экологичность и долговечность покрытия. Венецианская штукатурка создаёт эффект глубины и объёма, преображая любое помещение.</p>
+            <p>Идеально подходит для оформления гостиных, спален, холлов и ресторанов. Может наноситься на различные поверхности после соответствующей подготовки.</p>
           </div>
           <div class="tab-panel" id="specs">
-            <table class="specs-table">
-              <tr><td>Бренд</td><td>San Marco</td></tr>
-              <tr><td>Страна</td><td>Италия</td></tr>
-              <tr><td>Расход</td><td>0.3-0.5 кг/м²</td></tr>
-              <tr><td>Время высыхания</td><td>24 часа</td></tr>
-              <tr><td>Фасовка</td><td>1, 5, 15 кг</td></tr>
-            </table>
+            <div class="specs-grid">
+              <div class="spec-item">
+                <span class="spec-label">Бренд</span>
+                <span class="spec-value">San Marco</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Страна производства</span>
+                <span class="spec-value">Италия</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Расход</span>
+                <span class="spec-value">0.3-0.5 кг/м²</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Время высыхания</span>
+                <span class="spec-value">24 часа</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Фасовка</span>
+                <span class="spec-value">1, 5, 15 кг</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Срок хранения</span>
+                <span class="spec-value">24 месяца</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Основа</span>
+                <span class="spec-value">Мраморная крошка</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Тип нанесения</span>
+                <span class="spec-value">Шпателем, кельмой</span>
+              </div>
+            </div>
           </div>
           <div class="tab-panel" id="delivery">
-            <p>Доставка по Челябинску — от 500 ₽. Бесплатно при заказе от 15 000 ₽.</p>
-            <p>Самовывоз из салона: ул. Коммуны, 127 или ул. Труда, 174.</p>
+            <h3>Доставка</h3>
+            <p>Доставка по Челябинску — от 500 ₽. Бесплатно при заказе от 15 000 ₽. Доставка осуществляется в течение 1-2 рабочих дней после оформления заказа.</p>
+            <p>Самовывоз из салона бесплатно: ул. Коммуны, 127 или ул. Труда, 174. Время работы: ежедневно с 10:00 до 20:00.</p>
+            <h3 style="margin-top: 28px;">Оплата</h3>
+            <p>Принимаем оплату наличными при получении, банковскими картами, а также безналичный расчёт для юридических лиц.</p>
           </div>
         </div>
       </div>
@@ -880,7 +1255,13 @@
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">Похожие товары</h2>
-        <a href="catalog.html" class="link-arrow">Все товары <span>→</span></a>
+        <a href="catalog.html" class="section-link">
+          Все товары
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
       </div>
       <div class="products-grid">
         <a href="product.html" class="product-card">
@@ -889,7 +1270,7 @@
           </div>
           <div class="product-card-info">
             <span class="product-card-cat">Штукатурка</span>
-            <h3 class="product-card-name">Штукатурка Travertino</h3>
+            <h3 class="product-card-name">Штукатурка Travertino Natural</h3>
             <span class="product-card-price">7 200 ₽</span>
           </div>
         </a>
@@ -919,7 +1300,7 @@
           </div>
           <div class="product-card-info">
             <span class="product-card-cat">Фрески</span>
-            <h3 class="product-card-name">Фреска Renaissance</h3>
+            <h3 class="product-card-name">Фреска Renaissance Classic</h3>
             <span class="product-card-price">45 000 ₽</span>
           </div>
         </a>
@@ -929,44 +1310,56 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <div class="footer-logo-wrap">
-            <img src="./public/images/logo.webp" alt="Декор Комплект" class="footer-logo-img">
-            <div class="footer-logo-text">
-              <span class="footer-logo-name">Декор Комплект</span>
-              <span class="footer-logo-tagline">Салон декоративных покрытий</span>
-            </div>
-          </div>
-          <p class="footer-tagline">Премиальные отделочные материалы с 2009 года</p>
-        </div>
-        <div class="footer-col">
-          <h4>Каталог</h4>
-          <a href="catalog.html">Краски</a>
-          <a href="catalog.html">Штукатурка</a>
-          <a href="catalog.html">Обои</a>
-        </div>
-        <div class="footer-col">
-          <h4>Компания</h4>
-          <a href="#">О нас</a>
-          <a href="#">Контакты</a>
-        </div>
-        <div class="footer-col">
-          <h4>Контакты</h4>
-          <a href="tel:+73517277339">8 (351) 727-73-39</a>
-          <a href="#">ул. Коммуны, 127</a>
-        </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <img src="./public/images/logo.webp" alt="Декор Комплект" class="footer-logo-img">
+          <span class="footer-logo-name">Декор Комплект</span>
+        </a>
+        <p class="footer-desc">Премиальные декоративные покрытия для создания уникальных интерьеров. Работаем с 2009 года.</p>
       </div>
-      <div class="footer-bottom">
-        © 2009–2026 Декор Комплект
+      <div class="footer-col">
+        <h4>Каталог</h4>
+        <a href="catalog.html">Краски</a>
+        <a href="catalog.html">Штукатурка</a>
+        <a href="catalog.html">Обои</a>
+        <a href="catalog.html">Фрески</a>
       </div>
+      <div class="footer-col">
+        <h4>Компания</h4>
+        <a href="#">О нас</a>
+        <a href="#">Контакты</a>
+        <a href="#">Доставка</a>
+        <a href="#">Оплата</a>
+      </div>
+      <div class="footer-col">
+        <h4>Контакты</h4>
+        <a href="tel:+73517277339">8 (351) 727-73-39</a>
+        <a href="#">ул. Коммуны, 127</a>
+        <a href="#">ул. Труда, 174</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2009–2026 Декор Комплект. Все права защищены.</span>
     </div>
   </footer>
 
   <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Image gallery
     function changeImage(thumb, src) {
-      document.getElementById('mainImage').src = src;
+      const mainImage = document.getElementById('mainImage');
+      
+      gsap.to(mainImage, {
+        opacity: 0,
+        duration: 0.2,
+        onComplete: () => {
+          mainImage.src = src;
+          gsap.to(mainImage, { opacity: 1, duration: 0.3 });
+        }
+      });
+      
       document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
       thumb.classList.add('active');
     }
@@ -984,7 +1377,14 @@
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
         btn.classList.add('active');
-        document.getElementById(btn.dataset.tab).classList.add('active');
+        
+        const panel = document.getElementById(btn.dataset.tab);
+        panel.classList.add('active');
+        
+        gsap.fromTo(panel, 
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+        );
       });
     });
     
@@ -1001,6 +1401,113 @@
       btn.addEventListener('click', () => {
         document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+      });
+    });
+
+    // Page load animations
+    gsap.from('.breadcrumb', { opacity: 0, y: 20, duration: 0.6, delay: 0.2 });
+    gsap.from('.gallery', { opacity: 0, x: -40, duration: 0.8, delay: 0.3 });
+    gsap.from('.product-info', { opacity: 0, x: 40, duration: 0.8, delay: 0.4 });
+
+    // Product cards animation
+    gsap.utils.toArray('.product-card').forEach((card, i) => {
+      gsap.fromTo(card, 
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          delay: i * 0.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%'
+          }
+        }
+      );
+
+      // Tilt effect
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 25;
+        const rotateY = (centerX - x) / 25;
+        
+        gsap.to(card, {
+          rotateX: rotateX,
+          rotateY: rotateY,
+          duration: 0.4,
+          ease: 'power2.out',
+          transformPerspective: 1000
+        });
+      });
+
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, {
+          rotateX: 0,
+          rotateY: 0,
+          duration: 0.5,
+          ease: 'power2.out'
+        });
+      });
+    });
+
+    // Magnetic button effect
+    document.querySelectorAll('.btn-cart, .btn-wishlist').forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        gsap.to(btn, {
+          x: x * 0.15,
+          y: y * 0.15,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      });
+
+      btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, {
+          x: 0,
+          y: 0,
+          duration: 0.5,
+          ease: 'elastic.out(1, 0.5)'
+        });
+      });
+    });
+
+    // Add to cart animation
+    document.querySelector('.btn-cart').addEventListener('click', function() {
+      const btn = this;
+      const originalText = btn.innerHTML;
+      
+      gsap.to(btn, {
+        scale: 0.95,
+        duration: 0.1,
+        onComplete: () => {
+          btn.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            Добавлено в корзину
+          `;
+          btn.style.background = '#5B8C5A';
+          
+          gsap.to(btn, {
+            scale: 1,
+            duration: 0.3,
+            ease: 'elastic.out(1, 0.5)'
+          });
+          
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.style.background = '';
+          }, 2000);
+        }
       });
     });
   </script>
